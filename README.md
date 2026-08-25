@@ -30,11 +30,24 @@ npm run preview
 
 ## GitHub Pages
 
-Live site: **https://kyle-ip.github.io/build-your-own-board-game/**
+Live site (after deploy): **https://kyle-ip.github.io/build-your-own-board-game/**
 
-Push to `main` triggers the [Deploy GitHub Pages](.github/workflows/pages.yml) workflow. On first deploy, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** if it is not already selected.
+### One-time setup
 
-The workflow builds `site/` and publishes `site/dist`. Vite `base` is set from `GITHUB_REPOSITORY` automatically.
+1. Open [Settings → Pages](https://github.com/kyle-ip/build-your-own-board-game/settings/pages).
+2. Under **Build and deployment → Source**, choose **GitHub Actions**.
+
+### Automatic deploy
+
+Every push to `main` runs [.github/workflows/pages.yml](.github/workflows/pages.yml):
+
+1. `npm ci` + `npm run build` in `site/` (Node 22)
+2. Upload `site/dist` as a Pages artifact
+3. Deploy via `actions/deploy-pages@v4`
+
+You can also re-run the workflow manually from the **Actions** tab.
+
+Vite `base` is set from `GITHUB_REPOSITORY`, so asset paths work on `https://<user>.github.io/<repo>/`.
 
 ## Site map
 
