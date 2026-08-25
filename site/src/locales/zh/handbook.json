@@ -1,0 +1,141 @@
+{
+  "title": "Skill 使用教程",
+  "lead": "怎么跟 agent 说话、开哪种 mode、会留下哪些文件。示例默认收起，点开再看。",
+  "start": {
+    "title": "这套 Skill 在干什么",
+    "body": "Board Game Design 是一套 Agent Skill。由你给出约束和意图，它根据模式编写项目文件，并把 Locked 决定、evidence、experiment backlog 记在 design-state 里。它不是来聊天里堆一堆机制然后走人的。",
+    "habit": "第二次及以后开会，先说：read design-state first。"
+  },
+  "loop": {
+    "title": "核心 loop",
+    "steps": [
+      "Intent",
+      "Claim",
+      "Cheapest fidelity",
+      "Prototype",
+      "Experiment",
+      "Evidence",
+      "Diagnosis",
+      "Decision"
+    ],
+    "note": "更新 design-state，再重复。Simulation 证明不了好玩。"
+  },
+  "checklist": {
+    "title": "Prompt checklist",
+    "items": [
+      "人数、时长、受众、目标手感",
+      "新开还是续作（续作先写 read design-state first）",
+      "要哪些产出、写到哪个目录",
+      "迭代时：symptom + evidence",
+      "做实验时：一个变量 + success metric"
+    ]
+  },
+  "modes": {
+    "title": "六种 mode",
+    "lead": "一次尽量只开一种。点开卡片看 sample prompt。",
+    "exampleLabel": "Sample prompt",
+    "items": [
+      {
+        "id": "create",
+        "name": "Create",
+        "when": "从零开一款新游戏",
+        "do": "先比 2–4 个 chassis，再写 concept-brief、design-state、mechanism-skeleton。完整规则先别写。",
+        "example": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics.\nTarget feel: scarcity tension, long-term planning, light conflict. Audience: hobby gamers.\nCompare worker placement vs action drafting vs open market.\nWrite concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/.\nDo not write full rules yet."
+      },
+      {
+        "id": "diagnose",
+        "name": "Diagnose",
+        "when": "桌上感觉哪里坏了",
+        "do": "说出 symptom 和试玩事实，做 routing，再给一个可证伪的 hypothesis。别一次改三条规则。",
+        "example": "We've playtested 4 times (logs in ./orbital-mining/playtests/).\nLeader is usually decided by round 3; trailing players say they can't catch up.\nRead design-state first.\nDiagnose snowball vs low agency vs endgame drag, propose one falsifiable hypothesis, and draft EXP-005.\nDon't change three rules at once."
+      },
+      {
+        "id": "experiment",
+        "name": "Experiment",
+        "when": "要验证一个改动",
+        "do": "写清 baseline、只动一个变量、success metric 可测量。",
+        "example": "Set up EXP-002: test hand limit 3 to 2 only. Everything else stays v0.6.\nHypothesis: smaller hand increases discard-pile fights without adding AP.\nSuccess: in 4/5 playtests, both players contest discard at least twice; fun >= 3.5/5.\nWrite experiment.md and a blank playtest-log for the next session."
+      },
+      {
+        "id": "simulate",
+        "name": "Simulate",
+        "when": "只要系统侧数字",
+        "do": "问 win rate、时长、dominance。写 simulation-run。别把 sim 当「好玩」的证据。",
+        "example": "Run 1000 mixed-population simulations of Micro Scavenger with seed 42.\nFocus on length and seat win rates.\nWrite simulation-run and mark that this is not a fun proof."
+      },
+      {
+        "id": "balance",
+        "name": "Balance",
+        "when": "调数值和卡牌价值",
+        "do": "用 value budget。写清 confidence 和依赖。",
+        "example": "Review CARD-014 through CARD-022 in ./deck-builder/components-sheet.md.\nBuild balance-spreadsheet rows using value-budget; flag any card where cost vs estimated value differs by >40%.\nState confidence, calibration source, use scope, and interaction/combo/timing dependency for each estimate."
+      },
+      {
+        "id": "prototype",
+        "name": "Prototype",
+        "when": "要做出能玩的文件",
+        "do": "多数时候做 P4 paper PnP：rulebook draft、components sheet、checklist。",
+        "example": "Turn ./v0.5/mechanism-skeleton.md into a paper PnP:\nrulebook-draft, components-sheet, pnp-checklist.\n2-4p, 30 min, index-card prototype, no art.\nExport cards.csv per tools/export-pipeline.md if batch cards are needed.\nRun lint/checklist before finishing."
+      }
+    ]
+  },
+  "invariants": {
+    "title": "硬约束",
+    "items": [
+      "先读 design-state。没有新 evidence，别重开 Locked。",
+      "先 Diagnose，再改规则。",
+      "每个 experiment 只动一个变量。",
+      "优先 cheapest valid fidelity。",
+      "System evidence 不等于 experience evidence。",
+      "Simulation 冒尖了，也不能自动定案。"
+    ]
+  },
+  "artifacts": {
+    "title": "你会留下什么",
+    "items": [
+      { "name": "design-state.md", "why": "跨 session 的记忆" },
+      { "name": "concept-brief.md", "why": "卖点、受众、手感" },
+      { "name": "mechanism-skeleton.md", "why": "chassis 和 loop" },
+      { "name": "experiment.md + playtest-log", "why": "可证伪的测试" },
+      { "name": "rulebook + components + pnp-checklist", "why": "纸面原型" },
+      { "name": "decision.md", "why": "continue / restructure / pause" }
+    ]
+  },
+  "fidelity": {
+    "title": "Fidelity ladder",
+    "lead": "hypothesis 决定用哪一档。能便宜验证就别抬高。",
+    "items": [
+      { "id": "P0", "name": "Formal model" },
+      { "id": "P1", "name": "Simulation" },
+      { "id": "P2", "name": "UI prototype" },
+      { "id": "P3", "name": "Digital tabletop" },
+      { "id": "P4", "name": "Paper PnP（多数首个可玩版）" },
+      { "id": "P5", "name": "Production" }
+    ]
+  },
+  "kill": {
+    "title": "Kill gate",
+    "body": "试玩够了，让 agent 跑 kill-criteria：continue、restructure，还是 pause。乐趣分一直低，多半该动 chassis，别堆装饰。"
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "一定要装 Python 吗？",
+        "a": "不用。Design mode 只靠 Markdown。bgd-sim 是可选的。"
+      },
+      {
+        "q": "这等于 Building Blocks 原书吗？",
+        "a": "不等于。章节是综合后的取舍，不是原文 dump。想看原书请自己买。"
+      },
+      {
+        "q": "装到哪里比较好？",
+        "a": "游戏仓库要分享时，用项目级 .cursor/skills/board-game-design/。"
+      },
+      {
+        "q": "Sim 能证明好玩吗？",
+        "a": "不能。它答系统问题。好不好玩得人坐下来玩。"
+      }
+    ]
+  }
+}

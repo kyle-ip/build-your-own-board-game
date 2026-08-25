@@ -1,0 +1,246 @@
+{
+  "title": "Tutorial",
+  "version": "5.0.0",
+  "lead": "Install the Skill, choose a mode, write prompts the agent can act on, and inspect the project files it should maintain. Sample prompts stay collapsed until you expand them.",
+  "start": {
+    "title": "What the Skill does",
+    "body": "Board Game Design is an Agent Skill for evidence-driven tabletop design. You provide constraints, symptoms, and intent. The agent loads the smallest file set for the mode, writes templates into your project folder, and keeps Locked decisions, Claims, Evidence, and the experiment backlog in design-state.md.",
+    "habit": "From session 2 onward, start with: read design-state first, then your request."
+  },
+  "loop": {
+    "title": "Core loop",
+    "steps": [
+      "Intent",
+      "Model",
+      "Claim / Hypothesis",
+      "Select minimum valid fidelity",
+      "Prototype",
+      "Experiment",
+      "Evidence",
+      "Diagnosis",
+      "Decision"
+    ],
+    "note": "Update design-state.md and repeat. Pipeline: concept, mechanism skeleton, cheapest valid prototype, playtest or balance, optional polish. Simulation output does not validate fun."
+  },
+  "objects": {
+    "title": "Core objects",
+    "lead": "These recur in every mode. They are what persist state across sessions.",
+    "items": [
+      { "name": "State", "body": "design-state.md: Locked, Open, Rejected, Claims, Evidence, Target Player Model, experiment backlog." },
+      { "name": "Claim", "body": "Hypothesis with confidence, linked to EXP/HYP IDs." },
+      { "name": "Experiment", "body": "One variable, a baseline, a success metric, and a playtest-log link." },
+      { "name": "Prototype", "body": "Fidelity level (P0 to P5) and version, chosen for the hypothesis." },
+      { "name": "Artifact", "body": "Template outputs: concept-brief, mechanism-skeleton, simulation-run, rulebook bundle, decision.md, and related files." }
+    ]
+  },
+  "checklist": {
+    "title": "Prompt checklist",
+    "items": [
+      "Player count, duration, audience, target feel (MDA aesthetics)",
+      "New project or continuation (session 2+: say read design-state first)",
+      "Expected outputs and folder path (./my-game/)",
+      "For iteration: observed symptom and playtest evidence, not \"make it better\"",
+      "For tests: one variable and a measurable success metric",
+      "Optional: @file references to design-state, logs, or components"
+    ]
+  },
+  "modes": {
+    "title": "Six modes",
+    "lead": "Use one mode per session. Each entry lists what to load, what to write, and a sample prompt.",
+    "exampleLabel": "Sample prompt",
+    "items": [
+      {
+        "id": "create",
+        "name": "Create",
+        "when": "New game from scratch",
+        "load": "genre-profile/ (one file) + workflow.md + theme-and-experience.md",
+        "writes": "concept-brief.md, design-state.md (incl. Target Player Model), mechanism-skeleton.md",
+        "do": "Compare 2 to 4 mechanism chassis before locking. Skip full rules on the first pass.",
+        "example": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics.\nTarget feel: scarcity tension, long-term planning, light direct conflict.\nAudience: hobby gamers who know Wingspan but not heavy euros.\nCompare worker placement vs action drafting vs open market. Recommend one with trade-offs.\nWrite concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/ using templates/examples/micro-scavenger/ as format reference.\nDo not write full rules yet."
+      },
+      {
+        "id": "diagnose",
+        "name": "Diagnose",
+        "when": "Broken, boring, unfair, or forgettable play",
+        "load": "routing/symptom-index.md, then cheatsheet.md, then diagnostics/* (BG* system or ED* experience)",
+        "writes": "design-state.md; decision.md if you choose an intervention",
+        "do": "Route the symptom, state one falsifiable hypothesis, pick the cheapest valid fidelity. Do not stack rule changes.",
+        "example": "We've playtested 4 times (logs in ./orbital-mining/playtests/).\nLeader is usually decided by round 3; trailing players say they can't catch up.\nRead design-state first.\nDiagnose snowball vs low agency vs endgame drag, propose one falsifiable hypothesis, and draft EXP-005.\nDon't change three rules at once."
+      },
+      {
+        "id": "experiment",
+        "name": "Experiment",
+        "when": "Test one hypothesis with human play",
+        "load": "experiments/framework.md + prototype/selection.md (+ reasoning/experiment-priority.md if 2+ hypotheses)",
+        "writes": "experiment.md, playtest-log.md (linked by EXP/HYP IDs)",
+        "do": "Define baseline, one variable, and success metric. Update the experiment backlog in design-state.",
+        "example": "Set up EXP-002: test hand limit 3 to 2 only. Everything else stays v0.6.\nHypothesis: smaller hand increases discard-pile fights without adding AP.\nSuccess: in 4/5 playtests, both players contest discard at least twice; fun >= 3.5/5.\nWrite experiment.md and a blank playtest-log template for the next session."
+      },
+      {
+        "id": "simulate",
+        "name": "Simulate",
+        "when": "System metrics: win rate, game length, dominant strategy, population mix",
+        "load": "prototype/fidelity-ladder.md, prototype/selection.md, prototype/runtime.md",
+        "writes": "simulation-run.md (SIM ID), design-state Simulation Evidence",
+        "do": "Record seed, sample size, agent profiles, and confidence. Do not claim fun was validated.",
+        "example": "Run 1000 mixed-population simulations of Micro Scavenger with seed 42.\nFocus on length and seat win rates.\nWrite simulation-run.md and update design-state Evidence.\nState explicitly that this is system evidence, not experience evidence."
+      },
+      {
+        "id": "balance",
+        "name": "Balance",
+        "when": "Numbers, cards, economy, Effective Value Range",
+        "load": "balance/README.md",
+        "writes": "balance-notes.md; balance-spreadsheet.md when numeric work is needed",
+        "do": "One fix per pass. Link to an experiment or sim when testing one variable. Record confidence and dependencies.",
+        "example": "Review CARD-014 through CARD-022 in ./deck-builder/components-sheet.md.\nBuild balance-spreadsheet rows using value-budget; flag any card where cost vs total estimated value differs by >40%.\nState confidence, calibration source, use scope, and interaction/combo/timing dependency for each estimate."
+      },
+      {
+        "id": "prototype",
+        "name": "Prototype",
+        "when": "Build at chosen fidelity, usually P4 paper PnP",
+        "load": "prototype/selection.md, then P4 templates + tools/export-pipeline.md",
+        "writes": "rulebook-draft.md, components-sheet.md, pnp-checklist.md (or a fidelity plan for lower rungs)",
+        "do": "Run lint/checklist.md before P4 delivery. Export cards.csv when you need batch cards.",
+        "example": "Turn ./v0.5/mechanism-skeleton.md into a paper PnP:\nrulebook-draft, components-sheet, pnp-checklist.\n2-4p, 30 min, index-card prototype, no art.\nExport cards.csv per tools/export-pipeline.md if batch cards are needed.\nRun lint/checklist before finishing."
+      }
+    ],
+    "extraExamples": {
+      "title": "More sample prompts",
+      "items": [
+        {
+          "label": "Create: co-op with theme fit",
+          "text": "I want a family co-op card game (2-4p, 20 min) with a Cthulhu investigation theme.\nCore experience: dread and teamwork, not alpha-player quarterbacking.\nStart with theme-and-experience (emotion curve), then suggest mechanisms that fit.\nOutput files to ./deep-shallows/."
+        },
+        {
+          "label": "Diagnose: first-player advantage",
+          "text": "After 3 sessions, seat 1 wins 5/7 games at 4 players. Hypothesis: first pick on the worker track is too strong.\nRead design-state first. Run first-player-advantage diagnostic.\nSuggest the smallest rule change to test next, with success criteria (e.g. seat 1 win rate < 35% over 10 plays)."
+        },
+        {
+          "label": "Experiment: rank backlog",
+          "text": "Three hypotheses are open in design-state (HYP-001 through HYP-003).\nRead design-state first, rank them with experiment-priority, update the Experiment Backlog, and draft EXP-004 for rank 1 only."
+        },
+        {
+          "label": "Kill gate: after 3+ playtests",
+          "text": "We've completed PT-001 through PT-004. Core loop is learnable but average fun was 2.8/5 twice in a row.\nRun kill-criteria.md with me: Continue, Restructure, or Pause/Kill? Cite evidence."
+        },
+        {
+          "label": "Mechanism lookup: no new files",
+          "text": "Explain WPL-03 vs soft blocking (bumping) for a 2p game. Trade-offs only, no new project files."
+        }
+      ]
+    }
+  },
+  "mixed": {
+    "title": "Mixed requests",
+    "body": "When one prompt asks for design, PnP, and balance together, run Diagnose or Balance before Create or Prototype if symptoms exist. For system questions, run Simulate before large physical builds. Otherwise follow Create, then Prototype, then Balance. See cheatsheet.md for the priority tree."
+  },
+  "invariants": {
+    "title": "Hard invariants",
+    "items": [
+      "Read design-state first. Do not reopen Locked without new contradicting evidence.",
+      "Diagnose before changing rules: symptom and causal hypothesis first.",
+      "Minimal intervention: one variable per experiment, no stacked fixes.",
+      "Cheapest valid test first: lowest fidelity that can answer the hypothesis (prototype/fidelity-ladder.md).",
+      "System evidence is not experience evidence. Sims do not prove fun. Digital does not replace physical when physical_dependency is true.",
+      "Never auto-fix from a simulation anomaly. Follow Observation, Diagnostic, Hypothesis, Experiment."
+    ]
+  },
+  "milestones": {
+    "title": "Workflow milestones",
+    "lead": "Milestones 0 to 5 from workflow.md. Regress when evidence requires it; this is not a one-way waterfall.",
+    "items": [
+      { "id": "0", "name": "Concept", "body": "Pitch, MDA aesthetics, emotion curve, player count, playtime, audience. Output: concept-brief.md." },
+      { "id": "1", "name": "Core MVP", "body": "Paper loop, fun in one sentence. First human-playable build is usually P4." },
+      { "id": "2", "name": "Structure", "body": "Mechanism skeleton, spreadsheet data, candidate comparison." },
+      { "id": "3", "name": "Playtest", "body": "Experiments, playtest logs, kill gate. Allowed regressions: 3 to 1, 3 to 2." },
+      { "id": "4", "name": "Polish", "body": "Rulebook blind test, balance passes. Blind test failure returns to milestone 2." },
+      { "id": "5", "name": "Publish", "body": "Print specs, crowdfunding prep." }
+    ]
+  },
+  "genres": {
+    "title": "Genre profiles",
+    "lead": "In Create mode, load one genre-profile/ file and record it in design-state Project Status.",
+    "items": ["euro", "party", "social-deduction", "solo", "coop"]
+  },
+  "routing": {
+    "title": "Symptom routing",
+    "body": "Route vague symptoms through routing/symptom-index.md before diagnostics. System failures map to BG* codes (snowball, first-player advantage, dominant strategy, and others). Experience failures map to ED001 through ED008 (forgettable, generic, fantasy break, and others). Load the smallest matching diagnostic file, not every chapter."
+  },
+  "invocation": {
+    "title": "How to invoke the Skill",
+    "items": [
+      { "trigger": "No argument", "action": "Returns the SKILL.md overview and indexes." },
+      { "trigger": "Mechanism code (WPL-03, CAR-05)", "action": "Opens the matching chapters/chNN-*.md file." },
+      { "trigger": "Topic (auctions, worker placement)", "action": "Loads the chapter and the patterns.md entry." },
+      { "trigger": "Genre (euro, coop, party)", "action": "Loads genre-profile/*.md." },
+      { "trigger": "Vague symptom", "action": "Loads routing/symptom-index.md first." },
+      { "trigger": "System or balance simulation", "action": "Simulate mode, simulation-run.md; optional runtime/ (bgd-sim)." },
+      { "trigger": "After 3+ playtests", "action": "Loads kill-criteria.md for Continue, Restructure, or Pause-or-Kill." },
+      { "trigger": "Before shipping P4 artifacts", "action": "Runs lint/checklist.md." }
+    ]
+  },
+  "artifacts": {
+    "title": "Project artifacts",
+    "items": [
+      { "name": "design-state.md", "why": "Single source of truth across sessions" },
+      { "name": "concept-brief.md", "why": "Pitch, audience, Target Player Model, feel" },
+      { "name": "mechanism-skeleton.md", "why": "Chassis, core loop, 2 to 4 candidate comparison" },
+      { "name": "experiment.md + playtest-log.md", "why": "Falsifiable tests with EXP/HYP IDs" },
+      { "name": "simulation-run.md", "why": "Seeded system evidence (SIM IDs)" },
+      { "name": "balance-notes.md + balance-spreadsheet.md", "why": "Effective Value Range, one fix per pass" },
+      { "name": "rulebook + components + pnp-checklist", "why": "P4 paper prototype bundle" },
+      { "name": "decision.md + iteration.md", "why": "Major decisions and version bumps" }
+    ]
+  },
+  "fidelity": {
+    "title": "Fidelity ladder",
+    "lead": "The hypothesis selects the rung. P4 paper PnP is the usual first human-playable build.",
+    "items": [
+      { "id": "P0", "name": "Formal model: equations, state space" },
+      { "id": "P1", "name": "Simulation: Monte Carlo, optional bgd-sim" },
+      { "id": "P2", "name": "Digital UI prototype" },
+      { "id": "P3", "name": "Digital tabletop (TTS, Tabletopia)" },
+      { "id": "P4", "name": "Physical paper PnP, usual first playable" },
+      { "id": "P5", "name": "Production: POD or mass print" }
+    ]
+  },
+  "kill": {
+    "title": "Kill gate",
+    "lead": "After 3+ playtests, or if the core loop still fails after 2 weeks in Stage 1, run kill-criteria.md.",
+    "paths": [
+      { "name": "Continue", "body": "Core loop holds. Hypotheses are supported or fixable with single-variable experiments." },
+      { "name": "Restructure", "body": "Theme still works but the mechanism chassis does not. Return to Stage 1 or 2 and move failed mechanisms to Rejected." },
+      { "name": "Pause or Kill", "body": "Core premise fails. Archive the project and record learnings in design-state and iteration.md." }
+    ],
+    "note": "Fun at or below 3/5 for two sessions, with feedback on the same mechanism, usually means chassis work, not more rules."
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "Do I need Python?",
+        "a": "No. Design modes are Markdown only. runtime/ (bgd-sim) is optional for Monte Carlo on supported adapters such as Micro Scavenger."
+      },
+      {
+        "q": "Is this the Building Blocks book?",
+        "a": "No. chapters/ contains synthesized trade-offs from Engelstein and Shalev, not a verbatim copy. Buy the book for the source text."
+      },
+      {
+        "q": "Where should I install the Skill?",
+        "a": "Use a project-scoped path (.cursor/skills/, .claude/skills/, or .agents/skills/board-game-design/) when sharing a game repo. User-wide paths work for solo experiments."
+      },
+      {
+        "q": "Can sims prove the game is fun?",
+        "a": "No. Sims answer system questions: win rate, length, dominance. Humans validate experience, tension, and clarity."
+      },
+      {
+        "q": "What is context-budget?",
+        "a": "routing/context-budget.md defines required, optional, and forbidden file loads per mode so the agent does not bulk-load all 13 chapters."
+      },
+      {
+        "q": "Format reference for project files?",
+        "a": "Use templates/examples/micro-scavenger/ as the structure when starting a new game folder."
+      }
+    ]
+  }
+}

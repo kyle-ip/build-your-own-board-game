@@ -1,0 +1,48 @@
+{
+  "title": "Install Board Game Design",
+  "version": "5.0.0",
+  "lead": "Markdown-first Agent Skill (v5.0.0). Works in Cursor, Claude Code, Codex, and any host that reads SKILL.md per the Agent Skills spec.",
+  "note": "The folder name must match the skill name: board-game-design. Root SKILL.md must include YAML name and description fields.",
+  "cursor": {
+    "title": "Cursor",
+    "body": "Clone into your skills directory. Prefer project scope when the game repo is shared.",
+    "userWide": "User-wide",
+    "project": "Project-scoped (preferred for shared game repos)",
+    "command": "git clone https://github.com/kyle-ip/board-game-design.git ~/.cursor/skills/board-game-design"
+  },
+  "claude": {
+    "title": "Claude Code",
+    "body": "Same layout under .claude/skills/. Use project scope when the game repo is shared.",
+    "userWide": "User-wide: ~/.claude/skills/board-game-design/",
+    "project": "Project-scoped: .claude/skills/board-game-design/",
+    "command": "git clone https://github.com/kyle-ip/board-game-design.git ~/.claude/skills/board-game-design"
+  },
+  "codex": {
+    "title": "Codex",
+    "body": "Install under .agents/skills/, or use the Vercel skills CLI to symlink into Codex's skills directory.",
+    "userWide": "User-wide: ~/.agents/skills/board-game-design/",
+    "project": "Project-scoped: .agents/skills/board-game-design/",
+    "cliCommand": "npx skills add kyle-ip/board-game-design -a codex",
+    "command": "git clone https://github.com/kyle-ip/board-game-design.git ~/.agents/skills/board-game-design"
+  },
+  "prompt": {
+    "title": "Prompt checklist",
+    "items": [
+      "Player count, duration, audience, target feel (MDA aesthetics)",
+      "New project or continuation (session 2+: say read design-state first)",
+      "Expected outputs and folder path (./my-game/)",
+      "For iteration: observed symptom and playtest evidence",
+      "For tests: one variable and a measurable success metric",
+      "Optional: @file references to repo artifacts"
+    ]
+  },
+  "example": {
+    "title": "Starter Create prompt",
+    "text": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics.\nTarget feel: scarcity tension, long-term planning, light direct conflict.\nAudience: hobby gamers who know Wingspan but not heavy euros.\nCompare worker placement vs action drafting vs open market. Recommend one with trade-offs.\nWrite concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/ using templates/examples/micro-scavenger/ as format reference.\nDo not write full rules yet."
+  },
+  "runtime": {
+    "title": "Optional sim runtime (bgd-sim)",
+    "body": "Not required for design modes. After cloning the repo:",
+    "command": "pip install -e ./runtime\nbgd-sim run --game micro-scavenger --runs 1000 --seed 42 --population mixed --out sim.json"
+  }
+}

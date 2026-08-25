@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "title": "Design a board game with an agent that remembers the table.",
+    "sub": "Guide to the Board Game Design Skill (v5.0.0): install it, use the six modes, and keep Locked decisions in project files.",
+    "primary": "Read the tutorial",
+    "secondary": "Install the Skill"
+  },
+  "pain": {
+    "title": "Why chat alone breaks down",
+    "items": [
+      {
+        "title": "Locked decisions disappear",
+        "body": "The next session starts from scratch and reopens choices you already recorded in design-state."
+      },
+      {
+        "title": "Mechanism dump",
+        "body": "Ask for worker placement and get rules in chat with no concept-brief, skeleton, or project folder."
+      },
+      {
+        "title": "Unfalsifiable fixes",
+        "body": "Play feels dull, so three rules change at once. You cannot tell which variable mattered."
+      }
+    ]
+  },
+  "loop": {
+    "title": "Core loop",
+    "steps": [
+      "Intent",
+      "Model",
+      "Claim",
+      "Min fidelity",
+      "Prototype",
+      "Experiment",
+      "Evidence",
+      "Diagnosis",
+      "Decision"
+    ],
+    "note": "Update design-state.md and repeat. Sims answer system questions; they do not prove fun."
+  },
+  "modes": {
+    "title": "Six modes",
+    "items": [
+      { "id": "create", "name": "Create", "blurb": "Genre profile, brief, design-state, mechanism skeleton." },
+      { "id": "diagnose", "name": "Diagnose", "blurb": "Symptom routing (BG* / ED*) before rule changes." },
+      { "id": "experiment", "name": "Experiment", "blurb": "One variable, measurable success, playtest-log." },
+      { "id": "simulate", "name": "Simulate", "blurb": "Win rate, length, dominance. Not fun validation." },
+      { "id": "balance", "name": "Balance", "blurb": "Effective Value Range with confidence notes." },
+      { "id": "prototype", "name": "Prototype", "blurb": "Usually P4 paper PnP plus lint/checklist." }
+    ]
+  },
+  "promo": {
+    "title": "Read the tutorial first",
+    "body": "It covers modes, workflow milestones, symptom routing, sample prompts, and the kill gate. Install the Skill, then point it at your game folder.",
+    "cta": "Open the tutorial"
+  }
+}

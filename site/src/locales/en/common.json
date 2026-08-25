@@ -1,0 +1,23 @@
+{
+  "brand": "Board Game Design",
+  "tagline": "Tabletop design from evidence, not guesses.",
+  "nav": {
+    "home": "Home",
+    "handbook": "Tutorial",
+    "install": "Install"
+  },
+  "cta": {
+    "installSkill": "Install the Skill",
+    "readHandbook": "Read the tutorial",
+    "copy": "Copy",
+    "copied": "Copied",
+    "continue": "Continue",
+    "back": "Back",
+    "github": "Skill on GitHub"
+  },
+  "footer": {
+    "skillLink": "Skill repository",
+    "attribution": "Mechanism trade-offs draw on Building Blocks of Tabletop Game Design (Engelstein and Shalev). This site is not a verbatim copy of the book.",
+    "license": "Guide site: MIT. Skill v5.0.0: see repository license."
+  }
+}

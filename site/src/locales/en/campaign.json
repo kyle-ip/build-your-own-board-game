@@ -1,0 +1,101 @@
+{
+  "title": "Table Sessions",
+  "lead": "Five short seats at the design table. Progress saves in this browser.",
+  "locked": "Locked",
+  "done": "Cleared",
+  "current": "At the table",
+  "progress": "Sessions cleared: {{done}} / 5",
+  "graduation": {
+    "title": "Graduation",
+    "body": "You can open a real project with the Skill now. Start every return session with: read design-state first.",
+    "spellTitle": "Opening spell",
+    "spell": "Read design-state first. We are continuing Micro Scavenger. Diagnose any open symptom, then propose one single-variable experiment. Write files under ./micro-scavenger/.",
+    "ctaInstall": "Install the Skill",
+    "ctaWorkshop": "Revisit Workshop"
+  },
+  "sessions": [
+    {
+      "id": "s1",
+      "title": "Session 1: Open Create",
+      "goal": "Constraints beat empty ideas.",
+      "story": "You sit down with Micro Scavenger: a tiny scavenging race. The agent waits for a prompt.",
+      "task": "Pick the prompt that can actually start a project.",
+      "options": [
+        { "id": "a", "label": "Make a scavenger game.", "correct": false },
+        {
+          "id": "b",
+          "label": "2p, 20 min, family. Feel: tense racing. Compare set collection vs push-your-luck. Write brief + design-state + skeleton to ./micro-scavenger/. No full rules yet.",
+          "correct": true
+        },
+        { "id": "c", "label": "Add art and a Kickstarter page first.", "correct": false }
+      ],
+      "success": "Strong prompts name players, time, feel, comparison, and output path.",
+      "fail": "That prompt invites a mechanism dump or premature polish."
+    },
+    {
+      "id": "s2",
+      "title": "Session 2: Remember the table",
+      "goal": "design-state is memory.",
+      "story": "A week later the chat is new. Three sticky notes are on the cork board. Which ones are Locked?",
+      "task": "Select every Locked note. Leave hypotheses alone.",
+      "notes": [
+        { "id": "n1", "text": "2 players", "kind": "locked" },
+        { "id": "n2", "text": "HYP: hand size 4 might slow races", "kind": "hyp" },
+        { "id": "n3", "text": "20 minutes", "kind": "locked" },
+        { "id": "n4", "text": "Rejected: auction chassis", "kind": "rejected" },
+        { "id": "n5", "text": "Family audience", "kind": "locked" }
+      ],
+      "success": "Locked stays locked without contradicting evidence.",
+      "fail": "You grabbed a hypothesis or rejected item. Locked only."
+    },
+    {
+      "id": "s3",
+      "title": "Session 3: Diagnose first",
+      "goal": "Route the symptom before changing rules.",
+      "story": "Playtesters say the leader is obvious by round 3.",
+      "task": "Choose one diagnostic path.",
+      "options": [
+        { "id": "a", "label": "Nerf three cards and add a catch-up mechanic at once.", "correct": false },
+        { "id": "b", "label": "Route to runaway leader. Draft one falsifiable hypothesis.", "correct": true },
+        { "id": "c", "label": "Rewrite the theme to sci-fi.", "correct": false }
+      ],
+      "success": "One diagnostic, one hypothesis. Stacked fixes hide the signal.",
+      "fail": "That stacks changes or ignores the symptom."
+    },
+    {
+      "id": "s4",
+      "title": "Session 4: One knob + cheapest fidelity",
+      "goal": "Single variable. Do not overbuild.",
+      "story": "HYP-003: lowering hand limit increases discard fights.",
+      "task": "Change only one knob, then pick fidelity.",
+      "knobs": [
+        { "id": "hand", "label": "Hand limit 4 to 3", "correct": true },
+        { "id": "score", "label": "Also double end-game scoring", "correct": false },
+        { "id": "board", "label": "Also redesign the board", "correct": false }
+      ],
+      "fidelityCorrect": "P4",
+      "success": "One knob, paper PnP. Perfect.",
+      "fail": "Either too many knobs or too much fidelity."
+    },
+    {
+      "id": "s5",
+      "title": "Session 5: Ship files + kill gate",
+      "goal": "Outputs are files. Know when to stop.",
+      "story": "Fun scores: 2.6, 2.7, 2.5 after three tests. Chassis feels flat.",
+      "task": "Assemble the PnP file set, then pick the gate.",
+      "files": [
+        { "id": "rulebook", "label": "rulebook-draft.md", "needed": true },
+        { "id": "components", "label": "components-sheet.md", "needed": true },
+        { "id": "pnp", "label": "pnp-checklist.md", "needed": true },
+        { "id": "trailer", "label": "marketing-trailer.md", "needed": false }
+      ],
+      "gates": [
+        { "id": "continue", "label": "Continue polishing numbers", "correct": false },
+        { "id": "restructure", "label": "Restructure chassis (regress)", "correct": true },
+        { "id": "publish", "label": "Go straight to print", "correct": false }
+      ],
+      "success": "PnP files matter, and repeated low fun means restructure, not more chrome.",
+      "fail": "Missing playable files or the wrong gate."
+    }
+  ]
+}

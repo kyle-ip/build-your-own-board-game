@@ -1,0 +1,27 @@
+{
+  "brand": "Board Game Design",
+  "tagline": "设计桌游时，要以事实为依据，而不是凭感觉。",
+  "nav": {
+    "home": "首页",
+    "handbook": "使用教程",
+    "install": "安装"
+  },
+  "cta": {
+    "installSkill": "安装 Skill",
+    "readHandbook": "看使用教程",
+    "copy": "复制",
+    "copied": "已复制",
+    "continue": "继续",
+    "back": "返回",
+    "github": "GitHub 上的 Skill"
+  },
+  "footer": {
+    "skillLink": "Skill 仓库",
+    "attribution": "机制取舍参考了 Engelstein & Shalev 的《Building Blocks of Tabletop Game Design》，不是原书照抄。",
+    "license": "本站指南用 MIT。Skill 本体以仓库许可为准。"
+  },
+  "lang": {
+    "zh": "中文",
+    "en": "EN"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "title": "教具台",
+  "lead": "动手练 Skill 里的关键动作。随时可玩，闯关里也会碰到。",
+  "tools": {
+    "prompt": {
+      "title": "提示词对照",
+      "desc": "弱提示和强提示摆一起，强的一键复制。"
+    },
+    "symptom": {
+      "title": "症状路由盘",
+      "desc": "把含糊吐槽收成诊断标签。"
+    },
+    "fidelity": {
+      "title": "保真度阶梯",
+      "desc": "给假设挑够用、又最省事的那一档。"
+    },
+    "state": {
+      "title": "Design-State 便签板",
+      "desc": "Locked、Evidence、Backlog 三栏。"
+    },
+    "modes": {
+      "title": "模式转盘",
+      "desc": "六种模式分别什么时候用。"
+    }
+  },
+  "promptForge": {
+    "weakLabel": "弱",
+    "strongLabel": "强",
+    "weak": "给我做一个工人放置游戏。",
+    "strong": "2-4 人、45 分钟、稀缺感、爱好者向。比较工人放置、征召和市场。写到 ./mars-habitat/。完整规则先别写。",
+    "why": "把约束、对比和输出路径写清，才不容易换来空泛堆砌。"
+  },
+  "symptom": {
+    "pick": "选一句吐槽丢到桌上",
+    "complaints": [
+      { "id": "boring", "label": "第二轮开始就无聊" },
+      { "id": "unfair", "label": "一号位老赢" },
+      { "id": "snowball", "label": "第三轮就定输赢" },
+      { "id": "theme", "label": "主题像贴上去的" },
+      { "id": "agency", "label": "落后的人追不上" },
+      { "id": "ap", "label": "回合拖到睡着" }
+    ],
+    "results": {
+      "boring": { "code": "ED005 / 低能动", "hint": "先看体验问题，别急着堆规则。" },
+      "unfair": { "code": "先手优势", "hint": "先量座位胜率，再做一个最小改动。" },
+      "snowball": { "code": "领跑雪球", "hint": "一个假设，一次只改一个变量。" },
+      "theme": { "code": "ED002 主题脱节", "hint": "先看主题和机制贴不贴，再加花活。" },
+      "agency": { "code": "低能动", "hint": "雪球和「没决策可做」是两回事。" },
+      "ap": { "code": "分析瘫痪", "hint": "砍分支，或者让信息更早摊开。" }
+    },
+    "rule": "一次只跟一条诊断。别一口气改三条规则。"
+  },
+  "fidelity": {
+    "prompt": "假设：手牌上限从 3 降到 2，弃牌争夺会变多。",
+    "levels": [
+      { "id": "P0", "name": "形式模型", "ok": false, "why": "测社交争夺太干了。" },
+      { "id": "P1", "name": "模拟", "ok": false, "why": "能数次数，感觉不到桌上的火药味。" },
+      { "id": "P2", "name": "UI 原型", "ok": false, "why": "为一张纸牌微调有点浪费。" },
+      { "id": "P3", "name": "数字桌面", "ok": false, "why": "以后也许用得上，现在太贵。" },
+      { "id": "P4", "name": "纸面 PnP", "ok": true, "why": "测人与人抢弃牌，这一档最划算。" },
+      { "id": "P5", "name": "量产", "ok": false, "why": "这时候量产还早。" }
+    ],
+    "success": "选对了：这里用 P4 就够。",
+    "fail": "偏高了。再往便宜的档试。"
+  },
+  "state": {
+    "locked": "已锁定",
+    "evidence": "证据",
+    "backlog": "实验待办",
+    "hint": "便签可以改。刷新页面会回到样例桌。",
+    "sample": {
+      "locked": ["2-4 人", "45 分钟", "稀缺感"],
+      "evidence": ["PT-002：乐趣 3.2/5", "SIM-001：时长正常"],
+      "backlog": ["HYP-001 手牌上限", "HYP-002 终局计分"]
+    }
+  },
+  "modes": {
+    "when": "什么时候",
+    "load": "先读什么",
+    "out": "产出什么",
+    "items": [
+      {
+        "id": "create",
+        "name": "Create",
+        "when": "从零开一款新游戏",
+        "load": "genre-profile + workflow + theme",
+        "out": "concept-brief、design-state、骨架"
+      },
+      {
+        "id": "diagnose",
+        "name": "Diagnose",
+        "when": "桌上感觉哪里不对",
+        "load": "symptom-index，再进 diagnostics",
+        "out": "假设和决策笔记"
+      },
+      {
+        "id": "experiment",
+        "name": "Experiment",
+        "when": "要验证一个改动",
+        "load": "experiments/framework",
+        "out": "experiment.md、playtest-log"
+      },
+      {
+        "id": "simulate",
+        "name": "Simulate",
+        "when": "只要系统侧数字",
+        "load": "保真度阶梯和 runtime 说明",
+        "out": "simulation-run（证明不了好玩）"
+      },
+      {
+        "id": "balance",
+        "name": "Balance",
+        "when": "调数值、卡牌价值",
+        "load": "balance 模型",
+        "out": "balance-notes 或表格"
+      },
+      {
+        "id": "prototype",
+        "name": "Prototype",
+        "when": "要做出能玩的文件",
+        "load": "prototype selection",
+        "out": "规则书、组件表、PnP 清单"
+      }
+    ]
+  }
+}

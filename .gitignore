@@ -1,0 +1,23 @@
+# Local skill reference (not part of this guide repo)
+board-game-design/
+.agents/
+skills-lock.json
+
+# Dependencies & build
+node_modules/
+site/node_modules/
+site/dist/
+dist/
+
+# Env & OS
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.log

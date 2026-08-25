@@ -1,0 +1,33 @@
+{
+  "title": "安装 Board Game Design",
+  "lead": "以 Markdown 为主的 Agent Skill。Cursor、Claude Code，以及能读 SKILL.md 的 host 都能用。",
+  "cursor": {
+    "title": "Cursor",
+    "body": "克隆到 skills 目录。文件夹名必须是 board-game-design。",
+    "userWide": "用户级",
+    "project": "项目级（跟游戏仓库一起分享时更合适）",
+    "command": "git clone https://github.com/kyle-ip/board-game-design.git ~/.cursor/skills/board-game-design"
+  },
+  "other": {
+    "title": "其他 host",
+    "body": "放到 host 扫描 skills 的位置，常见是 .claude/skills/board-game-design/。"
+  },
+  "prompt": {
+    "title": "写 prompt 时别漏这些",
+    "items": [
+      "人数、时长、受众、目标手感",
+      "新开还是续作（续作先写 read design-state first）",
+      "要哪些产出、写到哪个目录",
+      "迭代时：symptom + evidence",
+      "做实验时：一个变量 + success metric"
+    ]
+  },
+  "example": {
+    "title": "Starter prompt",
+    "text": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics. Target feel: scarcity tension, long-term planning, light conflict. Audience: hobby gamers. Compare worker placement vs action drafting vs open market. Write concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/. Do not write full rules yet."
+  },
+  "runtime": {
+    "title": "可选：sim runtime",
+    "body": "Design mode 不需要。要的话 pip install -e ./runtime，再用 bgd-sim 对 Micro Scavenger 跑 Monte Carlo。"
+  }
+}

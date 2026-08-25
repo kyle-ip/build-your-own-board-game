@@ -1,0 +1,126 @@
+{
+  "title": "Workshop",
+  "lead": "Practice the key moves from the Skill. Open anytime, or meet them inside Table Sessions.",
+  "tools": {
+    "prompt": {
+      "title": "Prompt Forge",
+      "desc": "Weak vs strong prompts. Copy the strong one."
+    },
+    "symptom": {
+      "title": "Symptom Router",
+      "desc": "Vague complaints become diagnostic labels."
+    },
+    "fidelity": {
+      "title": "Fidelity Ladder",
+      "desc": "Pick the cheapest valid fidelity for a hypothesis."
+    },
+    "state": {
+      "title": "Design-State Board",
+      "desc": "Locked, Evidence, and Backlog sticky notes."
+    },
+    "modes": {
+      "title": "Mode Dial",
+      "desc": "When to use each of the six modes."
+    }
+  },
+  "promptForge": {
+    "weakLabel": "Weak",
+    "strongLabel": "Strong",
+    "weak": "Make me a worker placement game.",
+    "strong": "2-4p, 45 min, scarcity tension, hobby audience. Compare WP vs drafting vs market. Write files to ./mars-habitat/. Do not write full rules yet.",
+    "why": "Constraints, comparison, and an output path stop generic dumps."
+  },
+  "symptom": {
+    "pick": "Drop a complaint onto the table",
+    "complaints": [
+      { "id": "boring", "label": "It feels boring after round 2" },
+      { "id": "unfair", "label": "Seat 1 always wins" },
+      { "id": "snowball", "label": "Leader is decided by round 3" },
+      { "id": "theme", "label": "Theme feels pasted on" },
+      { "id": "agency", "label": "Trailing players have no catch-up" },
+      { "id": "ap", "label": "Turns take forever" }
+    ],
+    "results": {
+      "boring": { "code": "ED005 / low agency", "hint": "Diagnose experience before stacking rules." },
+      "unfair": { "code": "first-player-advantage", "hint": "Measure seat win rates, then one smallest fix." },
+      "snowball": { "code": "runaway leader", "hint": "One hypothesis, one variable experiment." },
+      "theme": { "code": "ED002 theme disconnect", "hint": "Check MDA fit before adding chrome." },
+      "agency": { "code": "low agency", "hint": "Separate snowball from missing decisions." },
+      "ap": { "code": "analysis paralysis", "hint": "Reduce branching or parallelize info." }
+    },
+    "rule": "One diagnostic path. Do not change three rules at once."
+  },
+  "fidelity": {
+    "prompt": "Hypothesis: hand limit 3 to 2 increases discard fights.",
+    "levels": [
+      { "id": "P0", "name": "Formal model", "ok": false, "why": "Too abstract for a social fight claim." },
+      { "id": "P1", "name": "Simulation", "ok": false, "why": "Can count contests, cannot feel the table." },
+      { "id": "P2", "name": "UI prototype", "ok": false, "why": "Overbuild for a paper card tweak." },
+      { "id": "P3", "name": "Digital tabletop", "ok": false, "why": "Useful later, not cheapest now." },
+      { "id": "P4", "name": "Paper PnP", "ok": true, "why": "Cheapest valid for human contesting." },
+      { "id": "P5", "name": "Production", "ok": false, "why": "Way too early." }
+    ],
+    "success": "P4 is the cheapest valid fidelity here.",
+    "fail": "That rung overshoots. Try cheaper."
+  },
+  "state": {
+    "locked": "Locked",
+    "evidence": "Evidence",
+    "backlog": "Experiment backlog",
+    "hint": "Edit sticky notes locally. Refresh resets the sample table.",
+    "sample": {
+      "locked": ["2-4 players", "45 minutes", "Scarcity tension"],
+      "evidence": ["PT-002: fun 3.2/5", "SIM-001: length OK"],
+      "backlog": ["HYP-001 hand limit", "HYP-002 end scoring"]
+    }
+  },
+  "modes": {
+    "when": "When",
+    "load": "Load first",
+    "out": "Outputs",
+    "items": [
+      {
+        "id": "create",
+        "name": "Create",
+        "when": "New game from scratch",
+        "load": "genre-profile + workflow + theme",
+        "out": "concept-brief, design-state, skeleton"
+      },
+      {
+        "id": "diagnose",
+        "name": "Diagnose",
+        "when": "Something feels broken",
+        "load": "symptom-index then diagnostics",
+        "out": "hypothesis + decision notes"
+      },
+      {
+        "id": "experiment",
+        "name": "Experiment",
+        "when": "Test one change",
+        "load": "experiments/framework",
+        "out": "experiment.md, playtest-log"
+      },
+      {
+        "id": "simulate",
+        "name": "Simulate",
+        "when": "System metrics only",
+        "load": "fidelity ladder + runtime notes",
+        "out": "simulation-run (not fun proof)"
+      },
+      {
+        "id": "balance",
+        "name": "Balance",
+        "when": "Numbers and card values",
+        "load": "balance model",
+        "out": "balance-notes / spreadsheet"
+      },
+      {
+        "id": "prototype",
+        "name": "Prototype",
+        "when": "Build playable files",
+        "load": "prototype selection",
+        "out": "rulebook, components, PnP checklist"
+      }
+    ]
+  }
+}

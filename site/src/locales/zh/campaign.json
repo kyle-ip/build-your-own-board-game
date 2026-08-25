@@ -1,0 +1,101 @@
+{
+  "title": "开桌闯关",
+  "lead": "五局短课，坐在设计桌边学。进度记在本浏览器里。",
+  "locked": "未解锁",
+  "done": "已通关",
+  "current": "进行中",
+  "progress": "已通关 {{done}} / 5",
+  "graduation": {
+    "title": "结业",
+    "body": "可以带着 Skill 开真项目了。以后每次回来，先说一句：read design-state first。",
+    "spellTitle": "开局咒语",
+    "spell": "先读 design-state。我们继续 Micro Scavenger。有未关闭的症状就先诊断，再提出一个单变量实验。文件写到 ./micro-scavenger/。",
+    "ctaInstall": "安装 Skill",
+    "ctaWorkshop": "回教具台"
+  },
+  "sessions": [
+    {
+      "id": "s1",
+      "title": "第 1 局：开 Create",
+      "goal": "约束比空想管用。",
+      "story": "桌上要做 Micro Scavenger：一场很短的拾荒竞速。代理在等你的提示。",
+      "task": "选出真正能开项目的那条。",
+      "options": [
+        { "id": "a", "label": "做个拾荒游戏。", "correct": false },
+        {
+          "id": "b",
+          "label": "2 人、20 分钟、家庭向。手感：紧张竞速。比较集套和搏运气。把 brief、design-state、骨架写到 ./micro-scavenger/。完整规则先别写。",
+          "correct": true
+        },
+        { "id": "c", "label": "先做美术和众筹页。", "correct": false }
+      ],
+      "success": "强提示得写清人数、时长、手感、对比和输出路径。",
+      "fail": "这种提示容易换来机制堆砌，或者过早打磨外表。"
+    },
+    {
+      "id": "s2",
+      "title": "第 2 局：记住牌桌",
+      "goal": "design-state 就是记忆。",
+      "story": "过了一周，聊天窗口是新的。软木板上还有便签。哪些是 Locked？",
+      "task": "把所有 Locked 选出来。假设别点。",
+      "notes": [
+        { "id": "n1", "text": "2 人", "kind": "locked" },
+        { "id": "n2", "text": "HYP：手牌 4 可能拖慢竞速", "kind": "hyp" },
+        { "id": "n3", "text": "20 分钟", "kind": "locked" },
+        { "id": "n4", "text": "已拒绝：拍卖底盘", "kind": "rejected" },
+        { "id": "n5", "text": "家庭受众", "kind": "locked" }
+      ],
+      "success": "没有相反证据，Locked 就别动。",
+      "fail": "你点到了假设或拒绝项。只要 Locked。"
+    },
+    {
+      "id": "s3",
+      "title": "第 3 局：先诊断",
+      "goal": "改规则前，先走症状路由。",
+      "story": "试玩的人说：第三轮就能看出谁领先。",
+      "task": "只选一条诊断路径。",
+      "options": [
+        { "id": "a", "label": "一次削三张牌，再加一套追赶。", "correct": false },
+        { "id": "b", "label": "按领跑雪球来路由，写一个能证伪的假设。", "correct": true },
+        { "id": "c", "label": "把主题改成科幻。", "correct": false }
+      ],
+      "success": "一条诊断、一个假设。改太多会把信号搅浑。",
+      "fail": "要么改得太猛，要么根本没对准症状。"
+    },
+    {
+      "id": "s4",
+      "title": "第 4 局：一个旋钮 + 最低保真",
+      "goal": "单变量，别过度制作。",
+      "story": "HYP-003：降低手牌上限，弃牌争夺会变多。",
+      "task": "只拧一个旋钮，再选保真度。",
+      "knobs": [
+        { "id": "hand", "label": "手牌上限 4 改成 3", "correct": true },
+        { "id": "score", "label": "顺手把终局计分加倍", "correct": false },
+        { "id": "board", "label": "地图也一起重做", "correct": false }
+      ],
+      "fidelityCorrect": "P4",
+      "success": "一个旋钮，纸面 PnP。刚好。",
+      "fail": "旋钮拧多了，或者保真度抬太高。"
+    },
+    {
+      "id": "s5",
+      "title": "第 5 局：交文件 + Kill gate",
+      "goal": "交的是文件。也要知道何时停。",
+      "story": "三次试玩乐趣分：2.6、2.7、2.5。底盘发闷。",
+      "task": "拼齐 PnP 文件，再选闸门。",
+      "files": [
+        { "id": "rulebook", "label": "rulebook-draft.md", "needed": true },
+        { "id": "components", "label": "components-sheet.md", "needed": true },
+        { "id": "pnp", "label": "pnp-checklist.md", "needed": true },
+        { "id": "trailer", "label": "marketing-trailer.md", "needed": false }
+      ],
+      "gates": [
+        { "id": "continue", "label": "继续打磨数值", "correct": false },
+        { "id": "restructure", "label": "重构底盘（回退）", "correct": true },
+        { "id": "publish", "label": "直接去印刷", "correct": false }
+      ],
+      "success": "PnP 文件要齐。分数一直低，该动底盘，别堆装饰。",
+      "fail": "可玩文件缺了，或者闸门选错。"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "title": "跟一个长记性的 AI，一起做出你的桌游",
+    "sub": "Board Game Design 是一套 Agent Skill。装上它，学会几种 mode，并锁定决策写进项目文件里。",
+    "primary": "看使用教程",
+    "secondary": "安装 Skill"
+  },
+  "pain": {
+    "title": "光靠聊天为什么撑不住",
+    "items": [
+      {
+        "title": "Locked 的决定说没就没",
+        "body": "下一轮对话，agent 又从零开始，把你早就定下的选择重新翻出来。"
+      },
+      {
+        "title": "机制一堆，文件没有",
+        "body": "说一句 worker placement，回来一长串规则，项目目录还是空的。"
+      },
+      {
+        "title": "改了几处，谁也不知道哪条管用",
+        "body": "觉得游戏无聊就一次改几条规则。即便变好了也说不清是哪条起了作用。"
+      }
+    ]
+  },
+  "loop": {
+    "title": "核心 loop",
+    "steps": [
+      "Intent",
+      "Claim",
+      "Cheapest fidelity",
+      "Prototype",
+      "Experiment",
+      "Evidence",
+      "Diagnosis",
+      "Decision"
+    ],
+    "note": "更新设计状态，再来重复上述步骤。"
+  },
+  "modes": {
+    "title": "六种模式",
+    "items": [
+      { "id": "create", "name": "Create", "blurb": "精简描述、设计状态、机制框架。" },
+      { "id": "diagnose", "name": "Diagnose", "blurb": "先做症状定位，再改规则。" },
+      { "id": "experiment", "name": "Experiment", "blurb": "一次动一个变量，成功标准写清楚。" },
+      { "id": "simulate", "name": "Simulate", "blurb": "只答系统问题，不当乐趣证明。" },
+      { "id": "balance", "name": "Balance", "blurb": "做价值推算，并写上置信度。" },
+      { "id": "prototype", "name": "Prototype", "blurb": "多数时候先做 P4 的 paper PnP。" }
+    ]
+  },
+  "promo": {
+    "title": "先看怎么用",
+    "body": "教程里有六种 mode，还有可展开的 sample prompt。装好 Skill，指到你的游戏目录就能开干。",
+    "cta": "打开使用教程"
+  }
+}
