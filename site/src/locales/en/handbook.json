@@ -1,10 +1,16 @@
 {
   "title": "Tutorial",
   "version": "5.0.0",
-  "lead": "Install the Skill, choose a mode, write prompts the agent can act on, and inspect the project files it should maintain. Sample prompts stay collapsed until you expand them.",
+  "lead": "Install the Skill, pick a mode, write prompts the agent can act on, and check the project files it should maintain. Sample prompts stay collapsed until you expand them.",
+  "walkthroughCta": {
+    "title": "Want the full project story?",
+    "body": "Example walks Beginner and Designer lifecycles end to end: prompts, who does what, and sequence diagrams. It does not run the Skill.",
+    "beginner": "Beginner track",
+    "designer": "Designer track"
+  },
   "start": {
     "title": "What the Skill does",
-    "body": "Board Game Design is an Agent Skill for evidence-driven tabletop design. You provide constraints, symptoms, and intent. The agent loads the smallest file set for the mode, writes templates into your project folder, and keeps Locked decisions, Claims, Evidence, and the experiment backlog in design-state.md.",
+    "body": "Board Game Design is an Agent Skill for evidence-driven tabletop design. You supply constraints, symptoms, and intent. The agent loads the smallest file set for the mode, writes templates into your project folder, and keeps Locked decisions, Claims, Evidence, and the experiment backlog in design-state.md.",
     "habit": "From session 2 onward, start with: read design-state first, then your request."
   },
   "loop": {
@@ -20,11 +26,11 @@
       "Diagnosis",
       "Decision"
     ],
-    "note": "Update design-state.md and repeat. Pipeline: concept, mechanism skeleton, cheapest valid prototype, playtest or balance, optional polish. Simulation output does not validate fun."
+    "note": "Update design-state.md and repeat. Typical pipeline: concept, mechanism skeleton, cheapest valid prototype, playtest or balance, optional polish. Simulation output does not validate fun."
   },
   "objects": {
     "title": "Core objects",
-    "lead": "These recur in every mode. They are what persist state across sessions.",
+    "lead": "These show up in every mode. They are what persist across sessions.",
     "items": [
       { "name": "State", "body": "design-state.md: Locked, Open, Rejected, Claims, Evidence, Target Player Model, experiment backlog." },
       { "name": "Claim", "body": "Hypothesis with confidence, linked to EXP/HYP IDs." },
@@ -46,7 +52,7 @@
   },
   "modes": {
     "title": "Six modes",
-    "lead": "Use one mode per session. Each mode lists what to load, what to write, and two prompt styles: for designers who already speak the vocabulary, and for players or beginners who only have an idea and plain-language feedback.",
+    "lead": "Use one mode per session. Each mode lists what to load, what to write, and two prompt styles: designer vocabulary, or player/beginner plain language.",
     "audiences": {
       "designer": {
         "title": "For professional game designers",
@@ -54,7 +60,7 @@
       },
       "beginner": {
         "title": "For players and beginners",
-        "lead": "You describe the game you want or what felt wrong at the table. Ask the agent to explain trade-offs in plain language, pick simple next steps, and write project files to ./your-game/ so nothing gets lost in chat."
+        "lead": "You describe the game you want or what felt wrong at the table. Ask the agent to explain trade-offs in plain language, pick simple next steps, and write files to ./your-game/ so nothing dies in chat."
       }
     },
     "exampleLabels": {

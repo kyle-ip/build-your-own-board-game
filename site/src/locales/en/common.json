@@ -4,16 +4,22 @@
   "nav": {
     "home": "Home",
     "handbook": "Tutorial",
+    "walkthrough": "Example",
     "install": "Install"
   },
   "cta": {
     "installSkill": "Install the Skill",
     "readHandbook": "Read the tutorial",
+    "readWalkthrough": "Open the example",
     "copy": "Copy",
     "copied": "Copied",
     "continue": "Continue",
     "back": "Back",
     "github": "Skill on GitHub"
+  },
+  "sideNav": {
+    "title": "On this page",
+    "aria": "Page sections"
   },
   "footer": {
     "skillLink": "Skill repository",

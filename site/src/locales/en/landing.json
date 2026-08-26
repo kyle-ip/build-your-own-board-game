@@ -1,12 +1,12 @@
 {
   "hero": {
-    "title": "Design a board game with an AI assistant",
+    "title": "Design a board game with your AI assistant",
     "sub": "Guide to the Board Game Design Skill (v5.0.0): install it, use the six modes, and keep Locked decisions in project files.",
     "primary": "Read the tutorial",
     "secondary": "Install the Skill"
   },
   "pain": {
-    "title": "Why chat alone breaks down",
+    "title": "Why free chat alone breaks down",
     "items": [
       {
         "title": "Locked decisions disappear",
@@ -14,11 +14,11 @@
       },
       {
         "title": "Mechanism dump",
-        "body": "Ask for worker placement and get rules in chat with no concept-brief, skeleton, or project folder."
+        "body": "Ask for \"worker placement\" and get rules in chat with no concept-brief, skeleton, or project files."
       },
       {
         "title": "Unfalsifiable fixes",
-        "body": "Play feels dull, so three rules change at once. You cannot tell which variable mattered."
+        "body": "Play feels dull, so three rules change at once. Even when they take effect, you cannot tell which variable mattered."
       }
     ]
   },

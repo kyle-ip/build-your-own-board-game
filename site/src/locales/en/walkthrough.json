@@ -1,0 +1,63 @@
+{
+  "title": "Example",
+  "version": "5.0.0",
+  "lead": "Two walkthroughs of how you and an agent ship a tabletop project. Stories and diagrams only. This page does not run the Skill or any sim.",
+  "shared": {
+    "title": "Pick a lifecycle",
+    "body": "First-time makers and working designers iterate differently. Pick the track that matches how you work. You can switch later; beginner chapters link out when a topic goes deeper.",
+    "objectsTitle": "Shared objects",
+    "objects": [
+      { "name": "State", "body": "design-state.md: durable project memory across chats." },
+      { "name": "Claim", "body": "A falsifiable hypothesis with a confidence level." },
+      { "name": "Experiment", "body": "One variable, a baseline, and a success metric." },
+      { "name": "Prototype", "body": "Lowest fidelity that can answer the question." },
+      { "name": "Artifact", "body": "Files in the repo, not advice that dies in chat." }
+    ],
+    "invariantsTitle": "Shared hard rules",
+    "invariants": [
+      "On session 2+, read design-state first.",
+      "Diagnose before stacking rule changes.",
+      "One variable per experiment.",
+      "Cheapest valid test first.",
+      "System metrics do not prove fun."
+    ],
+    "diagramTitle": "Two shapes of the same Skill",
+    "beginnerDiagramLabel": "Beginner",
+    "designerDiagramLabel": "Designer",
+    "siteMapTitle": "How this fits the guide"
+  },
+  "tracks": {
+    "beginner": {
+      "name": "Beginner",
+      "tagline": "Players and first-time designers",
+      "summary": "Short loop: idea, plain structure, home PnP, play, plain diagnose, one change, then keep / rethink / pause. Case: Cat Cafe."
+    },
+    "designer": {
+      "name": "Designer",
+      "tagline": "Professional tabletop designers",
+      "summary": "Milestones 0-5 with one restructure: modes, sims, balance, lint, and a publish boundary. Case: Night Market."
+    }
+  },
+  "ui": {
+    "you": "You",
+    "agent": "Agent",
+    "situation": "Situation",
+    "prompt": "Sample prompt",
+    "artifacts": "Expected artifacts",
+    "features": "Features covered",
+    "handbook": "Tutorial reference",
+    "advanced": "Go deeper",
+    "simpler": "Simpler path",
+    "toc": "Chapters",
+    "step": "Step",
+    "appendix": "Appendix",
+    "onThisPage": "On this page",
+    "overview": "Overview",
+    "appendixA": "A. End-to-end sequence",
+    "appendixB": "B. Prompt index",
+    "appendixC": "C. Feature coverage",
+    "changeTrack": "Switch track",
+    "caseLabel": "Case study",
+    "demoNote": "Copy prompts into your agent after install. Diagrams show the collaboration. Nothing on this page executes the Skill."
+  }
+}

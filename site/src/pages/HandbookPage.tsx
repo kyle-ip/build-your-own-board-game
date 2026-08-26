@@ -1,8 +1,29 @@
+import { useEffect, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CaretDown } from '@phosphor-icons/react'
 import { ButtonLink } from '../components/Button'
 import { CodeBlock } from '../components/CodeBlock'
 import { PageShell } from '../components/PageShell'
+import { PageSideNav, useSectionSpy } from '../components/PageSideNav'
+
+const HANDBOOK_SECTIONS = [
+  { id: 'start', key: 'start.title', short: '1' },
+  { id: 'loop', key: 'loop.title', short: '2' },
+  { id: 'objects', key: 'objects.title', short: '3' },
+  { id: 'checklist', key: 'checklist.title', short: '4' },
+  { id: 'modes', key: 'modes.title', short: '5' },
+  { id: 'mixed', key: 'mixed.title', short: '6' },
+  { id: 'invariants', key: 'invariants.title', short: '7' },
+  { id: 'milestones', key: 'milestones.title', short: '8' },
+  { id: 'genres', key: 'genres.title', short: '9' },
+  { id: 'routing', key: 'routing.title', short: '10' },
+  { id: 'invocation', key: 'invocation.title', short: '11' },
+  { id: 'artifacts', key: 'artifacts.title', short: '12' },
+  { id: 'fidelity', key: 'fidelity.title', short: '13' },
+  { id: 'kill', key: 'kill.title', short: '14' },
+  { id: 'faq', key: 'faq.title', short: '15' },
+] as const
 
 type ModeItem = {
   id: string
@@ -44,6 +65,7 @@ type MilestoneItem = {
 export function HandbookPage() {
   const { t } = useTranslation('handbook')
   const { t: tc } = useTranslation('common')
+  const [params] = useSearchParams()
   const loopSteps = t('loop.steps', { returnObjects: true }) as string[]
   const checklist = t('checklist.items', { returnObjects: true }) as string[]
   const objects = t('objects.items', { returnObjects: true }) as ObjectItem[]
@@ -69,13 +91,56 @@ export function HandbookPage() {
     returnObjects: true,
   }) as { q: string; a: string }[]
 
+  useEffect(() => {
+    const section = params.get('section')
+    if (!section) return
+    const el = document.getElementById(section)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [params])
+
+  const navItems = useMemo(
+    () =>
+      HANDBOOK_SECTIONS.map((section) => ({
+        id: section.id,
+        label: t(section.key),
+        short: section.short,
+      })),
+    [t],
+  )
+  const sectionIds = useMemo(() => navItems.map((item) => item.id), [navItems])
+  const activeId = useSectionSpy(sectionIds)
+
   return (
-    <PageShell className="py-10 sm:py-12">
+    <>
+      <PageSideNav
+        items={navItems}
+        activeId={activeId}
+        ariaLabel={tc('sideNav.aria')}
+        title={tc('sideNav.title')}
+      />
+      <PageShell className="py-10 sm:py-12">
+      <div id="handbook-top" className="scroll-mt-24">
       <p className="text-sm font-medium text-mint">Skill v{t('version')}</p>
       <h1 className="font-display text-4xl text-ink md:text-5xl">{t('title')}</h1>
       <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
+      </div>
 
-      <section className="mt-10 space-y-3">
+      <aside className="mt-8 rounded-[1.2rem] border border-mint/30 bg-mint/10 px-5 py-4">
+        <h2 className="font-display text-xl text-felt">{t('walkthroughCta.title')}</h2>
+        <p className="mt-1 max-w-3xl text-sm leading-relaxed text-ink-soft">
+          {t('walkthroughCta.body')}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <ButtonLink to="/walkthrough?track=beginner" variant="secondary">
+            {t('walkthroughCta.beginner')}
+          </ButtonLink>
+          <ButtonLink to="/walkthrough?track=designer" variant="ghost">
+            {t('walkthroughCta.designer')}
+          </ButtonLink>
+        </div>
+      </aside>
+
+      <section id="start" className="mt-10 scroll-mt-24 space-y-3">
         <h2 className="font-display text-2xl md:text-3xl">{t('start.title')}</h2>
         <p className="max-w-3xl leading-relaxed text-ink-soft">{t('start.body')}</p>
         <p className="rounded-xl border border-mint/30 bg-mint/10 px-4 py-3 text-sm text-felt">
@@ -83,7 +148,7 @@ export function HandbookPage() {
         </p>
       </section>
 
-      <section className="mt-12">
+      <section id="loop" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('loop.title')}</h2>
         <div className="mt-4 flex flex-wrap gap-2">
           {loopSteps.map((step, i) => (
@@ -99,7 +164,7 @@ export function HandbookPage() {
         <p className="mt-3 text-ink-soft">{t('loop.note')}</p>
       </section>
 
-      <section className="mt-12">
+      <section id="objects" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('objects.title')}</h2>
         <p className="mt-2 text-ink-soft">{t('objects.lead')}</p>
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -115,7 +180,7 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="checklist" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('checklist.title')}</h2>
         <ul className="mt-4 space-y-2">
           {checklist.map((item) => (
@@ -129,7 +194,7 @@ export function HandbookPage() {
         </ul>
       </section>
 
-      <section className="mt-12">
+      <section id="modes" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('modes.title')}</h2>
         <p className="mt-2 max-w-3xl text-ink-soft">{t('modes.lead')}</p>
 
@@ -252,12 +317,12 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="mixed" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('mixed.title')}</h2>
         <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">{t('mixed.body')}</p>
       </section>
 
-      <section className="mt-12">
+      <section id="invariants" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('invariants.title')}</h2>
         <ol className="mt-4 space-y-2">
           {invariants.map((item, i) => (
@@ -272,7 +337,7 @@ export function HandbookPage() {
         </ol>
       </section>
 
-      <section className="mt-12">
+      <section id="milestones" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('milestones.title')}</h2>
         <p className="mt-2 text-ink-soft">{t('milestones.lead')}</p>
         <div className="mt-4 space-y-2">
@@ -290,7 +355,7 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="genres" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('genres.title')}</h2>
         <p className="mt-2 text-ink-soft">{t('genres.lead')}</p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -305,12 +370,12 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="routing" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('routing.title')}</h2>
         <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">{t('routing.body')}</p>
       </section>
 
-      <section className="mt-12">
+      <section id="invocation" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('invocation.title')}</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[28rem] border-collapse text-sm">
@@ -334,7 +399,7 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="artifacts" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('artifacts.title')}</h2>
         <div className="mt-4 grid gap-2">
           {artifacts.map((a) => (
@@ -349,7 +414,7 @@ export function HandbookPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="fidelity" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('fidelity.title')}</h2>
         <p className="mt-2 text-ink-soft">{t('fidelity.lead')}</p>
         <ul className="mt-4 space-y-2">
@@ -362,7 +427,7 @@ export function HandbookPage() {
         </ul>
       </section>
 
-      <section className="mt-12">
+      <section id="kill" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('kill.title')}</h2>
         <p className="mt-2 max-w-3xl text-ink-soft">{t('kill.lead')}</p>
         <div className="mt-4 grid gap-2 sm:grid-cols-3">
@@ -379,7 +444,7 @@ export function HandbookPage() {
         <p className="mt-3 text-sm text-ink-soft">{t('kill.note')}</p>
       </section>
 
-      <section className="mt-12">
+      <section id="faq" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('faq.title')}</h2>
         <div className="mt-4 space-y-3">
           {faq.map((item) => (
@@ -398,5 +463,6 @@ export function HandbookPage() {
         <ButtonLink to="/install">{tc('cta.installSkill')}</ButtonLink>
       </div>
     </PageShell>
+    </>
   )
 }

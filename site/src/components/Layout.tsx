@@ -8,6 +8,7 @@ import { SKILL_REPO } from '../lib/storage'
 const links = [
   { to: '/', end: true, key: 'home' },
   { to: '/handbook', key: 'handbook' },
+  { to: '/walkthrough', key: 'walkthrough' },
   { to: '/install', key: 'install' },
 ] as const
 

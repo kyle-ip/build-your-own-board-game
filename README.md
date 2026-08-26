@@ -53,6 +53,7 @@ Vite `base` is set from `GITHUB_REPOSITORY`, so asset paths work on `https://<us
 
 - Home
 - Tutorial (`/handbook`) - how to use the Skill, with expandable sample prompts
+- Example (`/walkthrough`) - dual-track end-to-end lifecycle walkthrough (Beginner / Designer)
 - Install
 
 ## License
