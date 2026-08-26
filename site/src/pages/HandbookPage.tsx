@@ -177,7 +177,11 @@ export function HandbookPage() {
                   size={20}
                 />
               </summary>
-              <div className="grid gap-4 border-t border-ink/10 px-4 pb-4 pt-3 md:grid-cols-2 md:px-5">
+              <div
+                className="grid gap-4 border-t border-ink/10 px-4 pb-4 pt-3 md:grid-cols-2 md:px-5"
+                onClick={(event) => event.stopPropagation()}
+                onPointerDown={(event) => event.stopPropagation()}
+              >
                 <div>
                   <p className="mb-2 text-xs font-semibold tracking-wide text-blush-ink uppercase">
                     {t('modes.exampleLabels.beginner')}
@@ -212,7 +216,11 @@ export function HandbookPage() {
                   <summary className="cursor-pointer px-4 py-3 text-sm font-medium">
                     {item.label}
                   </summary>
-                  <div className="border-t border-blush/20 px-4 pb-4 pt-3">
+                  <div
+                    className="border-t border-blush/20 px-4 pb-4 pt-3"
+                    onClick={(event) => event.stopPropagation()}
+                    onPointerDown={(event) => event.stopPropagation()}
+                  >
                     <CodeBlock text={item.text} tone="paper" />
                   </div>
                 </details>
@@ -230,7 +238,11 @@ export function HandbookPage() {
                   <summary className="cursor-pointer px-4 py-3 text-sm font-medium">
                     {item.label}
                   </summary>
-                  <div className="border-t border-sky/20 px-4 pb-4 pt-3">
+                  <div
+                    className="border-t border-sky/20 px-4 pb-4 pt-3"
+                    onClick={(event) => event.stopPropagation()}
+                    onPointerDown={(event) => event.stopPropagation()}
+                  >
                     <CodeBlock text={item.text} tone="sky" />
                   </div>
                 </details>

@@ -1,7 +1,4 @@
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { CopySimple, Check } from '@phosphor-icons/react'
-import { copyText } from '../lib/storage'
+import { CopyStatus, useCopyFeedback } from './CopyButton'
 
 type Props = {
   text: string
@@ -11,14 +8,7 @@ type Props = {
 }
 
 export function CodeBlock({ text, tone = 'ink', className = '' }: Props) {
-  const { t } = useTranslation('common')
-  const [ok, setOk] = useState(false)
-
-  async function onCopy() {
-    await copyText(text)
-    setOk(true)
-    window.setTimeout(() => setOk(false), 1600)
-  }
+  const { copied, copy } = useCopyFeedback()
 
   const shell =
     tone === 'ink'
@@ -42,11 +32,11 @@ export function CodeBlock({ text, tone = 'ink', className = '' }: Props) {
       <div className="mt-3 flex justify-end">
         <button
           type="button"
-          onClick={() => void onCopy()}
+          onClick={(event) => void copy(text, event)}
+          onPointerDown={(event) => event.stopPropagation()}
           className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold transition active:translate-y-px ${btn}`}
         >
-          {ok ? <Check size={16} weight="bold" /> : <CopySimple size={16} />}
-          {ok ? t('cta.copied') : t('cta.copy')}
+          <CopyStatus copied={copied} />
         </button>
       </div>
     </div>
