@@ -95,7 +95,7 @@ function ChapterSection({
         {chapter.features.map((feature) => (
           <span
             key={feature}
-            className="rounded-full bg-ink px-3 py-1 text-xs text-foam sm:text-sm"
+            className="rounded-full border border-ink/10 bg-paper px-3 py-1 text-xs text-ink-soft sm:text-sm"
           >
             {feature}
           </span>
@@ -362,7 +362,7 @@ export function WalkthroughPage() {
                   <button
                     type="button"
                     onClick={() => scrollToId('appendix')}
-                    className="inline-flex rounded-full bg-ink px-3 py-1.5 text-xs font-medium text-foam sm:text-sm"
+                    className="inline-flex rounded-full border border-mint/25 bg-mint/10 px-3 py-1.5 text-xs font-medium text-felt sm:text-sm"
                   >
                     {t('ui.appendix')}
                   </button>

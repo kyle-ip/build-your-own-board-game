@@ -154,9 +154,9 @@ export function HandbookPage() {
           {loopSteps.map((step, i) => (
             <span
               key={step}
-              className="inline-flex max-w-full items-center gap-2 rounded-full bg-ink px-3 py-1.5 text-sm text-foam"
+              className="inline-flex max-w-full items-center gap-2 rounded-full border border-ink/10 bg-paper px-3 py-1.5 text-sm text-ink-soft"
             >
-              <span className="text-coral-bright">{i + 1}</span>
+              <span className="text-coral">{i + 1}</span>
               <span className="min-w-0">{step}</span>
             </span>
           ))}
@@ -344,12 +344,12 @@ export function HandbookPage() {
           {milestones.map((m) => (
             <div
               key={m.id}
-              className="grid gap-1 rounded-xl bg-ink px-4 py-3 text-cream sm:grid-cols-[auto_1fr]"
+              className="grid gap-1 rounded-xl border border-ink/10 bg-paper/90 px-4 py-3 sm:grid-cols-[auto_1fr]"
             >
-              <span className="font-display text-coral-bright">
+              <span className="font-display text-felt">
                 {m.id} · {m.name}
               </span>
-              <span className="text-sm text-cream/75">{m.body}</span>
+              <span className="text-sm text-ink-soft">{m.body}</span>
             </div>
           ))}
         </div>
@@ -405,10 +405,10 @@ export function HandbookPage() {
           {artifacts.map((a) => (
             <div
               key={a.name}
-              className="grid gap-1 rounded-xl bg-ink px-4 py-3 text-cream sm:grid-cols-[1.2fr_1fr]"
+              className="grid gap-1 rounded-xl border border-ink/10 bg-paper/90 px-4 py-3 sm:grid-cols-[1.2fr_1fr]"
             >
-              <code className="break-all font-mono text-sm text-coral-bright">{a.name}</code>
-              <span className="text-sm text-cream/75">{a.why}</span>
+              <code className="break-all font-mono text-sm text-felt">{a.name}</code>
+              <span className="text-sm text-ink-soft">{a.why}</span>
             </div>
           ))}
         </div>
