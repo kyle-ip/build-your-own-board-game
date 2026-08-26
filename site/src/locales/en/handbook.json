@@ -46,8 +46,21 @@
   },
   "modes": {
     "title": "Six modes",
-    "lead": "Use one mode per session. Each entry lists what to load, what to write, and a sample prompt.",
-    "exampleLabel": "Sample prompt",
+    "lead": "Use one mode per session. Each mode lists what to load, what to write, and two prompt styles: for designers who already speak the vocabulary, and for players or beginners who only have an idea and plain-language feedback.",
+    "audiences": {
+      "designer": {
+        "title": "For professional game designers",
+        "lead": "You name mechanisms, symptoms, fidelity, and variables. Prompts assume you run playtests and read design-state between sessions."
+      },
+      "beginner": {
+        "title": "For players and beginners",
+        "lead": "You describe the game you want or what felt wrong at the table. Ask the agent to explain trade-offs in plain language, pick simple next steps, and write project files to ./your-game/ so nothing gets lost in chat."
+      }
+    },
+    "exampleLabels": {
+      "beginner": "If you're a beginner: ",
+      "designer": "or a professional game designer: "
+    },
     "items": [
       {
         "id": "create",
@@ -56,7 +69,8 @@
         "load": "genre-profile/ (one file) + workflow.md + theme-and-experience.md",
         "writes": "concept-brief.md, design-state.md (incl. Target Player Model), mechanism-skeleton.md",
         "do": "Compare 2 to 4 mechanism chassis before locking. Skip full rules on the first pass.",
-        "example": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics.\nTarget feel: scarcity tension, long-term planning, light direct conflict.\nAudience: hobby gamers who know Wingspan but not heavy euros.\nCompare worker placement vs action drafting vs open market. Recommend one with trade-offs.\nWrite concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/ using templates/examples/micro-scavenger/ as format reference.\nDo not write full rules yet."
+        "designerExample": "Design a 2-4 player, 45-minute medium-weight game about Mars colony logistics.\nTarget feel: scarcity tension, long-term planning, light direct conflict.\nAudience: hobby gamers who know Wingspan but not heavy euros.\nCompare worker placement vs action drafting vs open market. Recommend one with trade-offs.\nWrite concept-brief, design-state, and mechanism-skeleton to ./mars-habitat/ using templates/examples/micro-scavenger/ as format reference.\nDo not write full rules yet.",
+        "beginnerExample": "I want a light board game for 3-4 friends, about 30-45 minutes, set in a cozy cat cafe we run together.\nVibe: funny, relaxed, a little competitive but no one should feel eliminated early.\nReference games we like: Ticket to Ride (easy to learn) and Unstable Unicorns (silly cards). I don't know terms like worker placement.\nCompare 2-3 simple ways the game could work. Explain each in plain language before recommending one.\nWrite concept-brief, design-state, and mechanism-skeleton to ./cat-cafe/ using templates/examples/micro-scavenger/ as the file format.\nNo full rulebook yet."
       },
       {
         "id": "diagnose",
@@ -65,7 +79,8 @@
         "load": "routing/symptom-index.md, then cheatsheet.md, then diagnostics/* (BG* system or ED* experience)",
         "writes": "design-state.md; decision.md if you choose an intervention",
         "do": "Route the symptom, state one falsifiable hypothesis, pick the cheapest valid fidelity. Do not stack rule changes.",
-        "example": "We've playtested 4 times (logs in ./orbital-mining/playtests/).\nLeader is usually decided by round 3; trailing players say they can't catch up.\nRead design-state first.\nDiagnose snowball vs low agency vs endgame drag, propose one falsifiable hypothesis, and draft EXP-005.\nDon't change three rules at once."
+        "designerExample": "We've playtested 4 times (logs in ./orbital-mining/playtests/).\nLeader is usually decided by round 3; trailing players say they can't catch up.\nRead design-state first.\nDiagnose snowball vs low agency vs endgame drag, propose one falsifiable hypothesis, and draft EXP-005.\nDon't change three rules at once.",
+        "beginnerExample": "We played my draft 3 times with friends (notes in ./cat-cafe/playtests/).\nBy round 2 the same person is always ahead and the rest stop caring. Rules are in ./cat-cafe/mechanism-skeleton.md.\nRead design-state first.\nI'm not sure what's wrong. Tell me the most likely problem in plain language, propose ONE small change to try next, and write it up as an experiment draft.\nDon't rewrite the whole game."
       },
       {
         "id": "experiment",
@@ -74,7 +89,8 @@
         "load": "experiments/framework.md + prototype/selection.md (+ reasoning/experiment-priority.md if 2+ hypotheses)",
         "writes": "experiment.md, playtest-log.md (linked by EXP/HYP IDs)",
         "do": "Define baseline, one variable, and success metric. Update the experiment backlog in design-state.",
-        "example": "Set up EXP-002: test hand limit 3 to 2 only. Everything else stays v0.6.\nHypothesis: smaller hand increases discard-pile fights without adding AP.\nSuccess: in 4/5 playtests, both players contest discard at least twice; fun >= 3.5/5.\nWrite experiment.md and a blank playtest-log template for the next session."
+        "designerExample": "Set up EXP-002: test hand limit 3 to 2 only. Everything else stays v0.6.\nHypothesis: smaller hand increases discard-pile fights without adding AP.\nSuccess: in 4/5 playtests, both players contest discard at least twice; fun >= 3.5/5.\nWrite experiment.md and a blank playtest-log template for the next session.",
+        "beginnerExample": "Last playtest everyone said the starting hand is too random: some people open strong, others can't do anything.\nRead design-state first.\nTest ONLY one change: deal 5 cards instead of 7 at start. Keep all other rules the same.\nSuccess: in the next 4 plays, at least 3 groups say everyone had a reasonable first turn.\nWrite experiment.md and a simple playtest-log I can fill in after game night."
       },
       {
         "id": "simulate",
@@ -83,7 +99,8 @@
         "load": "prototype/fidelity-ladder.md, prototype/selection.md, prototype/runtime.md",
         "writes": "simulation-run.md (SIM ID), design-state Simulation Evidence",
         "do": "Record seed, sample size, agent profiles, and confidence. Do not claim fun was validated.",
-        "example": "Run 1000 mixed-population simulations of Micro Scavenger with seed 42.\nFocus on length and seat win rates.\nWrite simulation-run.md and update design-state Evidence.\nState explicitly that this is system evidence, not experience evidence."
+        "designerExample": "Run 1000 mixed-population simulations of Micro Scavenger with seed 42.\nFocus on length and seat win rates.\nWrite simulation-run.md and update design-state Evidence.\nState explicitly that this is system evidence, not experience evidence.",
+        "beginnerExample": "My game always ends too fast and the first player wins too often, but I haven't playtested enough to be sure.\nRead design-state first.\nIf a simulation can answer length and win-rate questions, run one and explain results in plain language. If paper playtests are better at this stage, say so and tell me what to track on the next 5 plays.\nDo not change rules based on numbers alone."
       },
       {
         "id": "balance",
@@ -92,7 +109,8 @@
         "load": "balance/README.md",
         "writes": "balance-notes.md; balance-spreadsheet.md when numeric work is needed",
         "do": "One fix per pass. Link to an experiment or sim when testing one variable. Record confidence and dependencies.",
-        "example": "Review CARD-014 through CARD-022 in ./deck-builder/components-sheet.md.\nBuild balance-spreadsheet rows using value-budget; flag any card where cost vs total estimated value differs by >40%.\nState confidence, calibration source, use scope, and interaction/combo/timing dependency for each estimate."
+        "designerExample": "Review CARD-014 through CARD-022 in ./deck-builder/components-sheet.md.\nBuild balance-spreadsheet rows using value-budget; flag any card where cost vs total estimated value differs by >40%.\nState confidence, calibration source, use scope, and interaction/combo/timing dependency for each estimate.",
+        "beginnerExample": "I made 20 action cards in ./cat-cafe/components-sheet.md. Playtesters say a few cards are \"broken\" but I can't tell which.\nRead design-state first.\nReview the list, flag the 3 most likely outliers in plain language, and suggest adjusting ONE card first.\nWrite balance-notes.md. Skip heavy math unless it helps; explain your reasoning simply."
       },
       {
         "id": "prototype",
@@ -101,31 +119,72 @@
         "load": "prototype/selection.md, then P4 templates + tools/export-pipeline.md",
         "writes": "rulebook-draft.md, components-sheet.md, pnp-checklist.md (or a fidelity plan for lower rungs)",
         "do": "Run lint/checklist.md before P4 delivery. Export cards.csv when you need batch cards.",
-        "example": "Turn ./v0.5/mechanism-skeleton.md into a paper PnP:\nrulebook-draft, components-sheet, pnp-checklist.\n2-4p, 30 min, index-card prototype, no art.\nExport cards.csv per tools/export-pipeline.md if batch cards are needed.\nRun lint/checklist before finishing."
+        "designerExample": "Turn ./v0.5/mechanism-skeleton.md into a paper PnP:\nrulebook-draft, components-sheet, pnp-checklist.\n2-4p, 30 min, index-card prototype, no art.\nExport cards.csv per tools/export-pipeline.md if batch cards are needed.\nRun lint/checklist before finishing.",
+        "beginnerExample": "I have a rough skeleton in ./cat-cafe/mechanism-skeleton.md. I want to print a playable version at home for game night.\n2-4 players, about 30 minutes, index cards and paper tokens, no art needed.\nWrite rulebook-draft, components-sheet, and pnp-checklist I can print.\nUse simple language a friend who hasn't read the design files can follow."
       }
     ],
     "extraExamples": {
-      "title": "More sample prompts",
-      "items": [
+      "title": "Scenarios",
+      "designerTitle": "For designer",
+      "beginnerTitle": "For beginner",
+      "designerItems": [
         {
           "label": "Create: co-op with theme fit",
-          "text": "I want a family co-op card game (2-4p, 20 min) with a Cthulhu investigation theme.\nCore experience: dread and teamwork, not alpha-player quarterbacking.\nStart with theme-and-experience (emotion curve), then suggest mechanisms that fit.\nOutput files to ./deep-shallows/."
+          "text": "Family co-op card game (2-4p, 20 min), Cthulhu investigation theme.\nCore experience: dread and teamwork, not alpha-player quarterbacking.\nStart with theme-and-experience (emotion curve), then suggest mechanisms that fit.\nOutput to ./deep-shallows/."
+        },
+        {
+          "label": "Create: session 2+ (continue project)",
+          "text": "Read design-state first in ./mars-habitat/.\nWe locked action drafting last session. Draft the core loop diagram and update mechanism-skeleton with the chosen chassis only.\nDo not reopen worker placement unless new evidence."
         },
         {
           "label": "Diagnose: first-player advantage",
-          "text": "After 3 sessions, seat 1 wins 5/7 games at 4 players. Hypothesis: first pick on the worker track is too strong.\nRead design-state first. Run first-player-advantage diagnostic.\nSuggest the smallest rule change to test next, with success criteria (e.g. seat 1 win rate < 35% over 10 plays)."
+          "text": "After 3 sessions, seat 1 wins 5/7 games at 4 players. Hypothesis: first pick on the worker track is too strong.\nRead design-state first. Run first-player-advantage diagnostic.\nSmallest rule change to test next, with success criteria (seat 1 win rate < 35% over 10 plays)."
         },
         {
           "label": "Experiment: rank backlog",
-          "text": "Three hypotheses are open in design-state (HYP-001 through HYP-003).\nRead design-state first, rank them with experiment-priority, update the Experiment Backlog, and draft EXP-004 for rank 1 only."
+          "text": "Three hypotheses open in design-state (HYP-001 through HYP-003).\nRead design-state first, rank with experiment-priority, update Experiment Backlog, draft EXP-004 for rank 1 only."
+        },
+        {
+          "label": "Mixed request (symptom + PnP)",
+          "text": "Playtests say the mid-game is dull AND I want a PnP by Friday.\nRead design-state first. Diagnose mid-game drag first; do not jump to full PnP until we pick one hypothesis to test."
         },
         {
           "label": "Kill gate: after 3+ playtests",
-          "text": "We've completed PT-001 through PT-004. Core loop is learnable but average fun was 2.8/5 twice in a row.\nRun kill-criteria.md with me: Continue, Restructure, or Pause/Kill? Cite evidence."
+          "text": "PT-001 through PT-004 done. Core loop is learnable but average fun was 2.8/5 twice in a row.\nRun kill-criteria.md: Continue, Restructure, or Pause/Kill? Cite evidence."
         },
         {
-          "label": "Mechanism lookup: no new files",
+          "label": "Mechanism lookup (no new files)",
           "text": "Explain WPL-03 vs soft blocking (bumping) for a 2p game. Trade-offs only, no new project files."
+        }
+      ],
+      "beginnerItems": [
+        {
+          "label": "Create: idea from a story or hobby",
+          "text": "I love hiking and want a game about planning a weekend trail with 2-5 friends, 45-60 min, cooperative but with light individual goals.\nI don't know game design terms. Ask me up to 5 short questions if needed, then propose 2 simple structures and recommend one.\nSave files to ./trail-weekend/. Plain-language summary at the top of concept-brief."
+        },
+        {
+          "label": "Create: session 2+ (continue your game)",
+          "text": "Read design-state first in ./cat-cafe/.\nLast time we picked a card-drafting loop. This session: flesh out the skeleton with turn structure only. Still no full rulebook.\nExplain changes in plain language."
+        },
+        {
+          "label": "Diagnose: boring or confusing",
+          "text": "We played twice. People said \"it's fine\" but nobody asked to play again, and two players didn't understand how to win until the end.\nRead design-state first in ./my-game/.\nTell me the top 2 likely causes in plain language and ONE change to test next."
+        },
+        {
+          "label": "Experiment: party game rule tweak",
+          "text": "Our party game has a timer per turn. Test ONLY extending it from 30s to 45s.\nSuccess: fewer skipped turns and average fun >= 3.5/5 over 3 playtests.\nWrite experiment.md and a one-page playtest sheet I can print."
+        },
+        {
+          "label": "Prototype: first home print",
+          "text": "I only have handwritten notes in ./my-game/notes.md.\nTurn them into a minimal print-and-play: rules a new player can read in 5 minutes, card list, and what to cut from index cards.\nNo art, no fancy components."
+        },
+        {
+          "label": "Kill gate: should I keep going?",
+          "text": "We've playtested 5 times over a month. Friends are polite but enthusiasm is fading.\nRead design-state and playtest notes in ./cat-cafe/.\nIn plain language: Continue, rethink the core idea, or stop? Cite what we actually observed, not guesses."
+        },
+        {
+          "label": "I only know what I don't want",
+          "text": "I want a family game for ages 10+. NOT heavy euro, NOT 3+ hours, NOT player elimination.\nTheme open. Compare 2-3 light genres (party vs family coop vs set collection) in plain language.\nOutput to ./family-table/ with concept-brief and design-state only."
         }
       ]
     }

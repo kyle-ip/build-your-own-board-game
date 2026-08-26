@@ -11,7 +11,8 @@ type ModeItem = {
   load: string
   writes: string
   do: string
-  example: string
+  designerExample: string
+  beginnerExample: string
 }
 
 type ExtraExample = {
@@ -47,7 +48,10 @@ export function HandbookPage() {
   const checklist = t('checklist.items', { returnObjects: true }) as string[]
   const objects = t('objects.items', { returnObjects: true }) as ObjectItem[]
   const modes = t('modes.items', { returnObjects: true }) as ModeItem[]
-  const extraExamples = t('modes.extraExamples.items', {
+  const extraDesigner = t('modes.extraExamples.designerItems', {
+    returnObjects: true,
+  }) as ExtraExample[]
+  const extraBeginner = t('modes.extraExamples.beginnerItems', {
     returnObjects: true,
   }) as ExtraExample[]
   const invariants = t('invariants.items', { returnObjects: true }) as string[]
@@ -127,7 +131,25 @@ export function HandbookPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-2xl md:text-3xl">{t('modes.title')}</h2>
-        <p className="mt-2 text-ink-soft">{t('modes.lead')}</p>
+        <p className="mt-2 max-w-3xl text-ink-soft">{t('modes.lead')}</p>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-blush/25 bg-blush-soft px-4 py-3">
+            <p className="font-display text-lg text-blush-ink">
+              {t('modes.audiences.beginner.title')}
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+              {t('modes.audiences.beginner.lead')}
+            </p>
+          </div>
+          <div className="rounded-xl border border-sky/25 bg-sky-soft px-4 py-3">
+            <p className="font-display text-lg text-sky-ink">{t('modes.audiences.designer.title')}</p>
+            <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+              {t('modes.audiences.designer.lead')}
+            </p>
+          </div>
+        </div>
+
         <div className="mt-5 space-y-3">
           {modes.map((mode) => (
             <details
@@ -155,11 +177,19 @@ export function HandbookPage() {
                   size={20}
                 />
               </summary>
-              <div className="border-t border-ink/10 px-4 pb-4 pt-3 md:px-5">
-                <p className="mb-2 text-xs font-semibold tracking-wide text-ink/50 uppercase">
-                  {t('modes.exampleLabel')}
-                </p>
-                <CodeBlock text={mode.example} tone="mint" />
+              <div className="grid gap-4 border-t border-ink/10 px-4 pb-4 pt-3 md:grid-cols-2 md:px-5">
+                <div>
+                  <p className="mb-2 text-xs font-semibold tracking-wide text-blush-ink uppercase">
+                    {t('modes.exampleLabels.beginner')}
+                  </p>
+                  <CodeBlock text={mode.beginnerExample} tone="paper" />
+                </div>
+                <div>
+                  <p className="mb-2 text-xs font-semibold tracking-wide text-sky-ink uppercase">
+                    {t('modes.exampleLabels.designer')}
+                  </p>
+                  <CodeBlock text={mode.designerExample} tone="sky" />
+                </div>
               </div>
             </details>
           ))}
@@ -168,18 +198,45 @@ export function HandbookPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-2xl md:text-3xl">{t('modes.extraExamples.title')}</h2>
-        <div className="mt-4 space-y-3">
-          {extraExamples.map((item) => (
-            <details
-              key={item.label}
-              className="rounded-[var(--radius-card)] border border-ink/10 bg-paper"
-            >
-              <summary className="cursor-pointer px-4 py-3 font-medium">{item.label}</summary>
-              <div className="border-t border-ink/10 px-4 pb-4 pt-3">
-                <CodeBlock text={item.text} tone="mint" />
-              </div>
-            </details>
-          ))}
+        <div className="mt-6 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 className="font-display text-xl text-blush-ink">
+              {t('modes.extraExamples.beginnerTitle')}
+            </h3>
+            <div className="mt-4 space-y-3">
+              {extraBeginner.map((item) => (
+                <details
+                  key={item.label}
+                  className="rounded-[var(--radius-card)] border border-blush/25 bg-blush-soft"
+                >
+                  <summary className="cursor-pointer px-4 py-3 text-sm font-medium">
+                    {item.label}
+                  </summary>
+                  <div className="border-t border-blush/20 px-4 pb-4 pt-3">
+                    <CodeBlock text={item.text} tone="paper" />
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-display text-xl text-sky-ink">{t('modes.extraExamples.designerTitle')}</h3>
+            <div className="mt-4 space-y-3">
+              {extraDesigner.map((item) => (
+                <details
+                  key={item.label}
+                  className="rounded-[var(--radius-card)] border border-sky/25 bg-sky-soft"
+                >
+                  <summary className="cursor-pointer px-4 py-3 text-sm font-medium">
+                    {item.label}
+                  </summary>
+                  <div className="border-t border-sky/20 px-4 pb-4 pt-3">
+                    <CodeBlock text={item.text} tone="sky" />
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

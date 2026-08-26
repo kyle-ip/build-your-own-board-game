@@ -65,7 +65,7 @@ export function InstallPage() {
 
       <section className="mt-10 space-y-3">
         <h2 className="font-display text-2xl md:text-3xl">{t('example.title')}</h2>
-        <CodeBlock text={t('example.text')} tone="mint" />
+        <CodeBlock text={t('example.text')} tone="sky" />
       </section>
 
       <section className="mt-10 space-y-3">

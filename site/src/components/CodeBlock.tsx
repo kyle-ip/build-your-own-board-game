@@ -5,8 +5,8 @@ import { copyText } from '../lib/storage'
 
 type Props = {
   text: string
-  /** Dark ink panel (default) or mint example panel */
-  tone?: 'ink' | 'mint'
+  /** Dark ink panel (default), soft sky designer example, or soft blush beginner example */
+  tone?: 'ink' | 'sky' | 'paper'
   className?: string
 }
 
@@ -23,12 +23,16 @@ export function CodeBlock({ text, tone = 'ink', className = '' }: Props) {
   const shell =
     tone === 'ink'
       ? 'bg-ink text-coral-bright'
-      : 'border border-mint/30 bg-mint/10 text-ink'
+      : tone === 'sky'
+        ? 'border border-sky/30 bg-sky-soft text-ink shadow-[inset_0_1px_0_rgb(255_255_255_/0.55)]'
+        : 'border border-blush/30 bg-blush-soft text-ink shadow-[inset_0_1px_0_rgb(255_255_255_/0.55)]'
 
   const btn =
     tone === 'ink'
       ? 'border-cream/25 bg-paper/10 text-cream hover:bg-paper/20'
-      : 'border-ink/15 bg-paper text-ink hover:border-ink/30'
+      : tone === 'sky'
+        ? 'border-sky/25 bg-paper text-ink hover:border-sky/40'
+        : 'border-blush/25 bg-paper text-ink hover:border-blush/40'
 
   return (
     <div className={`min-w-0 rounded-[var(--radius-card)] p-4 ${shell} ${className}`}>
