@@ -45,7 +45,7 @@ function ChapterSection({
 
       <div className="mt-4">
         <h4 className="text-sm font-semibold text-ink/70">{t('ui.situation')}</h4>
-        <p className="mt-1 max-w-3xl leading-relaxed text-ink-soft">{chapter.situation}</p>
+        <p className="mt-1 leading-relaxed text-ink-soft">{chapter.situation}</p>
       </div>
 
       <div className="mt-5 grid gap-3 md:grid-cols-2">
@@ -229,15 +229,15 @@ export function WalkthroughPage() {
         <div id="shared-top" className="scroll-mt-24">
           <p className="text-sm font-medium text-mint">Skill v{t('version')}</p>
           <h1 className="font-display text-4xl text-ink md:text-5xl">{t('title')}</h1>
-          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
-          <p className="mt-3 max-w-3xl rounded-xl border border-mint/30 bg-mint/10 px-4 py-3 text-sm text-felt">
+          <p className="mt-3 text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
+          <p className="mt-3 rounded-xl border border-mint/30 bg-mint/10 px-4 py-3 text-sm text-felt">
             {t('ui.demoNote')}
           </p>
         </div>
 
         <section className="mt-10 space-y-4">
           <h2 className="font-display text-2xl md:text-3xl">{t('shared.title')}</h2>
-          <p className="max-w-3xl leading-relaxed text-ink-soft">{t('shared.body')}</p>
+          <p className="leading-relaxed text-ink-soft">{t('shared.body')}</p>
 
           <div className="grid gap-3 md:grid-cols-2">
             {(['beginner', 'designer'] as const).map((id) => (
@@ -327,7 +327,7 @@ export function WalkthroughPage() {
                 <h2 className="font-display text-3xl text-ink">
                   {t(`tracks.${track}.name`)} {t('title')}
                 </h2>
-                <p className="mt-2 max-w-3xl text-ink-soft">{content.caseBlurb}</p>
+                <p className="mt-2 text-ink-soft">{content.caseBlurb}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Button

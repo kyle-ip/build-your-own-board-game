@@ -28,7 +28,7 @@ export function InstallPage() {
     <PageShell className="py-10 sm:py-12">
       <p className="text-sm font-medium text-mint">Skill v{t('version')}</p>
       <h1 className="font-display text-4xl text-ink md:text-5xl">{t('title')}</h1>
-      <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
+      <p className="mt-3 text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
       <p className="mt-2 text-sm text-ink-soft">{t('note')}</p>
 
       {hosts.map((host) => (

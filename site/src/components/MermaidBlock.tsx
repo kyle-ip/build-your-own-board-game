@@ -14,6 +14,7 @@ type Props = {
 
 type Mermaid = typeof MermaidApi
 type Point = { x: number; y: number }
+type Size = { w: number; h: number }
 
 let mermaidPromise: Promise<Mermaid> | null = null
 let renderSeq = 0
@@ -34,8 +35,9 @@ function loadMermaid() {
         startOnLoad: false,
         securityLevel: 'loose',
         theme: 'base',
+        // Native SVG text stays sharp when we resize; htmlLabels blur under CSS scale.
         flowchart: {
-          htmlLabels: true,
+          htmlLabels: false,
           curve: 'basis',
           nodeSpacing: 28,
           rankSpacing: 36,
@@ -76,7 +78,7 @@ function loadMermaid() {
   return mermaidPromise
 }
 
-function computeFitSize(svg: SVGSVGElement, containerWidth: number) {
+function computeFitSize(svg: SVGSVGElement, containerWidth: number): Size | null {
   const vb = svg.viewBox.baseVal
   const vbW = vb?.width || Number(svg.getAttribute('width')) || 0
   const vbH = vb?.height || Number(svg.getAttribute('height')) || 0
@@ -114,21 +116,28 @@ function computeFitSize(svg: SVGSVGElement, containerWidth: number) {
   return { w: Math.round(width), h: Math.round(height) }
 }
 
-function applyBaseSize(svg: SVGSVGElement, size: { w: number; h: number }) {
+/** Resize SVG in layout pixels so vectors redraw sharp (no CSS scale blur). */
+function applyDisplaySize(svg: SVGSVGElement, size: Size, zoom: number) {
+  const w = Math.round(size.w * zoom)
+  const h = Math.round(size.h * zoom)
   svg.removeAttribute('width')
   svg.removeAttribute('height')
-  svg.style.width = `${size.w}px`
-  svg.style.height = `${size.h}px`
+  svg.setAttribute('width', String(w))
+  svg.setAttribute('height', String(h))
+  svg.style.width = `${w}px`
+  svg.style.height = `${h}px`
   svg.style.maxWidth = 'none'
   svg.style.display = 'block'
+  svg.style.shapeRendering = 'geometricPrecision'
+  svg.style.textRendering = 'geometricPrecision'
 }
 
 export function MermaidBlock({ diagramId, className = '' }: Props) {
   const raw = getDiagram(diagramId)
   const hostRef = useRef<HTMLDivElement>(null)
   const shellRef = useRef<HTMLDivElement>(null)
-  const viewportRef = useRef<HTMLDivElement>(null)
-  const baseSizeRef = useRef<{ w: number; h: number } | null>(null)
+  const baseSizeRef = useRef<Size | null>(null)
+  const zoomRef = useRef(1)
   const reactId = useId().replace(/:/g, '')
   const [error, setError] = useState<string | null>(null)
   const [zoom, setZoom] = useState(1)
@@ -144,21 +153,34 @@ export function MermaidBlock({ diagramId, className = '' }: Props) {
     pointerId: number
   } | null>(null)
 
-  const refit = useCallback(() => {
+  const paintSize = useCallback((nextZoom = zoomRef.current) => {
+    const svgEl = hostRef.current?.querySelector('svg')
+    const base = baseSizeRef.current
+    if (!svgEl || !base) return
+    applyDisplaySize(svgEl, base, nextZoom)
+  }, [])
+
+  const refitBase = useCallback(() => {
     const svgEl = hostRef.current?.querySelector('svg')
     const shell = shellRef.current
     if (!svgEl || !shell) return
     const size = computeFitSize(svgEl, shell.clientWidth)
     if (!size) return
     baseSizeRef.current = size
-    applyBaseSize(svgEl, size)
-  }, [])
+    paintSize(zoomRef.current)
+  }, [paintSize])
 
   useEffect(() => {
     setZoom(1)
+    zoomRef.current = 1
     setPan({ x: 0, y: 0 })
     baseSizeRef.current = null
   }, [diagramId])
+
+  useEffect(() => {
+    zoomRef.current = zoom
+    paintSize(zoom)
+  }, [zoom, paintSize])
 
   useEffect(() => {
     if (!raw || !hostRef.current) return
@@ -179,7 +201,7 @@ export function MermaidBlock({ diagramId, className = '' }: Props) {
         const { svg } = await mermaid.render(id, raw!)
         if (cancelled || !hostRef.current) return
         hostRef.current.innerHTML = svg
-        refit()
+        refitBase()
         setError(null)
       } catch (err) {
         if (cancelled) return
@@ -191,17 +213,17 @@ export function MermaidBlock({ diagramId, className = '' }: Props) {
     return () => {
       cancelled = true
     }
-  }, [diagramId, raw, reactId, refit])
+  }, [diagramId, raw, reactId, refitBase])
 
   useEffect(() => {
     const shell = shellRef.current
     if (!shell) return
     const ro = new ResizeObserver(() => {
-      refit()
+      refitBase()
     })
     ro.observe(shell)
     return () => ro.disconnect()
-  }, [diagramId, refit])
+  }, [diagramId, refitBase])
 
   function bumpZoom(delta: number) {
     setZoom((z) => {
@@ -306,7 +328,6 @@ export function MermaidBlock({ diagramId, className = '' }: Props) {
       </div>
 
       <div
-        ref={viewportRef}
         className={[
           'relative overflow-hidden select-none',
           dragging ? 'cursor-grabbing' : 'cursor-grab',
@@ -323,12 +344,11 @@ export function MermaidBlock({ diagramId, className = '' }: Props) {
           <div
             className="absolute inset-0 flex items-center justify-center"
             style={{
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-              transformOrigin: 'center center',
+              transform: `translate(${pan.x}px, ${pan.y}px)`,
               willChange: 'transform',
             }}
           >
-            <div ref={hostRef} className="pointer-events-none" />
+            <div ref={hostRef} className="pointer-events-none [&_svg]:overflow-visible" />
           </div>
         )}
       </div>

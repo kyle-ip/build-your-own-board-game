@@ -122,12 +122,12 @@ export function HandbookPage() {
       <div id="handbook-top" className="scroll-mt-24">
       <p className="text-sm font-medium text-mint">Skill v{t('version')}</p>
       <h1 className="font-display text-4xl text-ink md:text-5xl">{t('title')}</h1>
-      <p className="mt-3 max-w-3xl text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
+      <p className="mt-3 text-lg leading-relaxed text-ink-soft">{t('lead')}</p>
       </div>
 
       <aside className="mt-8 rounded-[1.2rem] border border-mint/30 bg-mint/10 px-5 py-4">
         <h2 className="font-display text-xl text-felt">{t('walkthroughCta.title')}</h2>
-        <p className="mt-1 max-w-3xl text-sm leading-relaxed text-ink-soft">
+        <p className="mt-1 text-sm leading-relaxed text-ink-soft">
           {t('walkthroughCta.body')}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ export function HandbookPage() {
 
       <section id="start" className="mt-10 scroll-mt-24 space-y-3">
         <h2 className="font-display text-2xl md:text-3xl">{t('start.title')}</h2>
-        <p className="max-w-3xl leading-relaxed text-ink-soft">{t('start.body')}</p>
+        <p className="leading-relaxed text-ink-soft">{t('start.body')}</p>
         <p className="rounded-xl border border-mint/30 bg-mint/10 px-4 py-3 text-sm text-felt">
           {t('start.habit')}
         </p>
@@ -196,7 +196,7 @@ export function HandbookPage() {
 
       <section id="modes" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('modes.title')}</h2>
-        <p className="mt-2 max-w-3xl text-ink-soft">{t('modes.lead')}</p>
+        <p className="mt-2 text-ink-soft">{t('modes.lead')}</p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-blush/25 bg-blush-soft px-4 py-3">
@@ -319,7 +319,7 @@ export function HandbookPage() {
 
       <section id="mixed" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('mixed.title')}</h2>
-        <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">{t('mixed.body')}</p>
+        <p className="mt-2 leading-relaxed text-ink-soft">{t('mixed.body')}</p>
       </section>
 
       <section id="invariants" className="mt-12 scroll-mt-24">
@@ -372,7 +372,7 @@ export function HandbookPage() {
 
       <section id="routing" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('routing.title')}</h2>
-        <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">{t('routing.body')}</p>
+        <p className="mt-2 leading-relaxed text-ink-soft">{t('routing.body')}</p>
       </section>
 
       <section id="invocation" className="mt-12 scroll-mt-24">
@@ -429,7 +429,7 @@ export function HandbookPage() {
 
       <section id="kill" className="mt-12 scroll-mt-24">
         <h2 className="font-display text-2xl md:text-3xl">{t('kill.title')}</h2>
-        <p className="mt-2 max-w-3xl text-ink-soft">{t('kill.lead')}</p>
+        <p className="mt-2 text-ink-soft">{t('kill.lead')}</p>
         <div className="mt-4 grid gap-2 sm:grid-cols-3">
           {killPaths.map((path) => (
             <div
